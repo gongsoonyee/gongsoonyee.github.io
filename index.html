@@ -42,7 +42,9 @@ title: Home
 
         {% for post in paginator.posts %}
 
+        {% unless post.featured %}
         {% include postbox.html %}
+        {% endunless %}
 
         {% endfor %}
 
