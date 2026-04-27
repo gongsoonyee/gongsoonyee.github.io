@@ -2,6 +2,7 @@
 layout: post
 title: "백준 서비스 종료"
 categories: [ Essay ]
+tags: [ 백준, 회고 ]
 image: assets/images/baekjoon-repo.jpg
 ---
 
