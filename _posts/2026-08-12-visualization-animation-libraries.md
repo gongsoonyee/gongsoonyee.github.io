@@ -2,6 +2,7 @@
 layout: post
 title: "웹을 움직이게 만드는 시각화 라이브러리 3종"
 categories: [ AI, Development ]
+cover: "차트는 bklit UI, 인터랙션은 Motion, 연출은 anime.js"
 ---
 
 2026년 8월 12일 · @gongsoonyee
