@@ -2,6 +2,7 @@
 layout: post
 title: "ADsP 50회 합격 후기"
 categories: [ Study ]
+tags: [ ADsP, 자격증, 합격 후기 ]
 image: assets/images/adsp-result.jpg
 ---
 
