@@ -2,6 +2,7 @@
 layout: post
 title: 'shadcn/ui vs 당근 SEED: "해줘"로 만든 밋밋한 화면을 예쁘게 바꾸는 디자인 세팅'
 categories: [ Design, AI ]
+tags: [ shadcn/ui, 디자인 시스템, 당근 SEED ]
 image: assets/images/shadcn-ui-superbig.png
 ---
 
