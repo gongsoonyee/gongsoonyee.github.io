@@ -2,9 +2,12 @@
 layout: post
 title: 'shadcn/ui vs 당근 SEED: "해줘"로 만든 밋밋한 화면을 예쁘게 바꾸는 디자인 세팅'
 categories: [ Design, AI ]
+image: assets/images/shadcn-ui-superbig.png
 ---
 
 2026년 9월 5일 · @gongsoonyee
+
+![shadcn/ui 소개 화면]({{ site.baseurl }}/assets/images/shadcn-ui-superbig.png)
 
 ## "해줘"로 만든 화면은 왜 늘 2% 부족할까
 
