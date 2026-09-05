@@ -7,8 +7,6 @@ image: assets/images/shadcn-ui-superbig.png
 
 2026년 9월 5일 · @gongsoonyee
 
-![shadcn/ui 소개 화면]({{ site.baseurl }}/assets/images/shadcn-ui-superbig.png)
-
 ## "해줘"로 만든 화면은 왜 늘 2% 부족할까
 
 AI에게 "대시보드 만들어줘"라고만 하면 기능은 돌아가는데 화면은 어딘가 밋밋합니다. 회색 카드, 파란 버튼, 제각각인 여백과 글자 크기. 모델이 디자인을 못해서라기보다, 기준이 없으니 매번 평균값으로 그리기 때문입니다.
