@@ -9,15 +9,15 @@ image: assets/images/ai-top100-2026-banner.png
 
 <div class="ai-top100" markdown="0">
 <style>
-.ai-top100{--ink:#20352e;--text:#39483f;--muted:#66736b;--line:#d9dfd5;--paper:#fffef9;--cream:#f4f3e9;--green:#206047;--green-soft:#e3eee5;--orange:#bb5438;--orange-soft:#f7e6dd;--blue:#345b79;--blue-soft:#e7edf2}
+.ai-top100{--ink:#222222;--text:#333333;--muted:#666666;--line:#eaeaea;--paper:#ffffff;--cream:#f7f7f7;--green:#1C9963;--green-soft:#e6f6ef;--orange:#1C9963;--orange-soft:#e6f6ef;--blue:#333333;--blue-soft:#f2f2f2}
 .ai-top100 *{box-sizing:border-box}
 .ai-top100{scroll-behavior:smooth}
-.ai-top100{margin:0;background:var(--paper);color:var(--text);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.9;word-break:keep-all;overflow-wrap:anywhere}
+.ai-top100{margin:0;background:var(--paper);color:var(--text);font-family:Merriweather,-apple-system,BlinkMacSystemFont,"Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.9;word-break:keep-all;overflow-wrap:anywhere}
 .ai-top100 .topline{border-top:6px solid var(--green);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;padding:15px max(5vw,24px);font-size:11px;letter-spacing:.12em;color:var(--green);font-weight:700}
 .ai-top100 main{max-width:920px;margin:auto;padding:55px 44px 30px}
 .ai-top100 .kicker{font-size:11px;letter-spacing:.18em;color:var(--orange);font-weight:700;margin:0 0 18px}
 .ai-top100 .intro-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
-.ai-top100 .intro-meta span+span:before{content:' / ';margin-right:10px;color:#aab3a5}
+.ai-top100 .intro-meta span+span:before{content:' / ';margin-right:10px;color:#bbbbbb}
 .ai-top100 .article-title{font-size:clamp(30px,4.4vw,46px);line-height:1.42;letter-spacing:-.045em;color:var(--ink);margin:22px 0 30px;max-width:740px;font-weight:800}
 .ai-top100 article>p{margin:0 0 22px;font-size:16px;line-height:1.95}
 .ai-top100 article>p:first-of-type{font-size:19px;line-height:1.8;color:var(--ink)}
@@ -68,7 +68,7 @@ image: assets/images/ai-top100-2026-banner.png
 .ai-top100 .architecture{text-align:center}
 .ai-top100 .arch-edge{background:var(--paper);padding:11px 16px;max-width:330px;margin:auto;font-size:14px;font-weight:600;border-radius:7px}
 .ai-top100 .link-down{font-size:19px;line-height:1.6;color:var(--muted)}
-.ai-top100 .arch-server{border:1px solid #a9bdae;border-radius:10px;padding:20px 18px 0;background:#edf3ea}
+.ai-top100 .arch-server{border:1px solid #cccccc;border-radius:10px;padding:20px 18px 0;background:#f5f5f5}
 .ai-top100 .arch-server>h3{font-size:23px;margin:3px 0 17px;color:var(--green)}
 .ai-top100 .arch-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .ai-top100 .arch-trio div{padding:12px 4px;background:var(--paper);border-radius:7px;font-size:12px;line-height:1.7}
@@ -79,8 +79,8 @@ image: assets/images/ai-top100-2026-banner.png
 .ai-top100 .api span{display:block;font-size:12px;font-weight:400;opacity:.85}
 .ai-top100 .bar-label{display:flex;justify-content:space-between;gap:12px;font-size:13px;margin-bottom:8px;align-items:baseline}
 .ai-top100 .bar-label span{color:var(--muted);white-space:nowrap}
-.ai-top100 .bar-track{height:28px;background:#e3e5da;margin-bottom:20px;position:relative}
-.ai-top100 .bar-before{width:100%;height:100%;background:#a8b5a8}
+.ai-top100 .bar-track{height:28px;background:#e5e5e5;margin-bottom:20px;position:relative}
+.ai-top100 .bar-before{width:100%;height:100%;background:#cccccc}
 .ai-top100 .bar-after{width:33.33333%;height:100%;background:var(--green-soft);position:relative;border:1px dashed var(--green)}
 .ai-top100 .bar-after>span{display:block;background:var(--green);height:100%;width:50%}
 .ai-top100 .bar-scale{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:-12px}
@@ -91,8 +91,8 @@ image: assets/images/ai-top100-2026-banner.png
 .ai-top100 .flow-stem i{font-style:normal;display:block;line-height:1.5;color:var(--muted)}
 .ai-top100 .flow-stem .decision-node{background:var(--blue-soft);color:var(--blue);font-weight:600}
 .ai-top100 .decision-branches{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
-.ai-top100 .branch{position:relative;border-top:2px solid #a8b5a8;padding-top:12px;text-align:center}
-.ai-top100 .branch:before{content:'';position:absolute;top:-23px;left:50%;height:21px;border-left:1px solid #a8b5a8}
+.ai-top100 .branch{position:relative;border-top:2px solid #cccccc;padding-top:12px;text-align:center}
+.ai-top100 .branch:before{content:'';position:absolute;top:-23px;left:50%;height:21px;border-left:1px solid #cccccc}
 .ai-top100 .branch.proceed{border-color:var(--green)}
 .ai-top100 .branch b{font-size:12px;color:var(--muted)}
 .ai-top100 .branch.proceed b{color:var(--green)}
@@ -213,6 +213,8 @@ image: assets/images/ai-top100-2026-banner.png
 .ai-top100 .tc-source{padding:0 17px 18px}
 .ai-top100 .tc-samples>h3{font-size:19px}
 .ai-top100 .sample-notice{font-size:12px}}
+.ai-top100 h1,.ai-top100 h2,.ai-top100 h3,.ai-top100 h4,.ai-top100 h5,.ai-top100 h6{font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans KR",sans-serif}
+
 </style>
 <p>AI TOP 100에서 「교동마을 산지직송」의 고객 문의를 처리하는 카카오톡 상담 에이전트를 만들었습니다. 배송 조회나 환불 안내부터 개인정보 보호, 가격 차액 보상, 규정 충돌까지 다뤄야 하는 과제였습니다.</p>
 <p>처음에는 고객 질문에 맞는 문서를 찾아 답하면 될 것처럼 보였습니다. 하지만 실제로는 필요한 지식부터 직접 모아야 했고, 답변뿐 아니라 조회·접수·이관까지 정확하게 처리해야 했습니다. 고객의 요구를 어디까지 받아들일지, 어떤 사실을 확인한 뒤 행동할지도 구현해야 했습니다.</p>
