@@ -2,6 +2,7 @@
 layout: post
 title: "AI TOP 100 예선 참여 후기"
 categories: [ AI, Development ]
+tags: [ AI TOP 100, Claude, 후기 ]
 image: assets/images/ai-top100-2026-banner.png
 ---
 
