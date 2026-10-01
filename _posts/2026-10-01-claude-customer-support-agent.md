@@ -2,6 +2,7 @@
 layout: post
 title: "Claude와 함께 만든 고객 응대 에이전트: AI TOP 100 참여 후기"
 categories: [ AI, Development ]
+image: assets/images/ai-top100-2026-banner.png
 ---
 
 2026년 10월 1일 · @gongsoonyee
