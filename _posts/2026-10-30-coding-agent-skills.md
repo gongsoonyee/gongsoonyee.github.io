@@ -2,6 +2,7 @@
 layout: post
 title: "요즘 잘 쓰고 있는 코딩 에이전트 스킬 2가지: Cloudflare security-audit & Ponytail"
 categories: [ AI, Development ]
+cover: "Cloudflare security-audit & Ponytail"
 ---
 
 2026년 10월 30일 · @gongsoonyee
