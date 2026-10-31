@@ -3,6 +3,7 @@ layout: post
 title: "AI 에이전트 '피클' 후기"
 categories: [ AI ]
 tags: [ 피클, AI 에이전트, 개인정보 ]
+image: assets/images/pickle-hero.jpg
 ---
 
 2026년 11월 1일 · @gongsoonyee
