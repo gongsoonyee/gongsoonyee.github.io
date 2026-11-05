@@ -7,8 +7,6 @@ image: assets/images/iclr-submission-trend.jpg
 
 2026년 11월 5일 · @gongsoonyee
 
-![ICLR 제출 논문 수 추이]({{ site.baseurl }}/assets/images/iclr-submission-trend.jpg)
-
 ## 들어가며: 심사가 제출을 따라가지 못한다
 
 ICLR 2027은 한 사람이 공저자로 이름을 올릴 수 있는 제출 논문을 최대 20편으로 묶었습니다. ML 분야를 대표하는 학회가 저자 단위 상한을 들고나온 것이어서 학계에서 큰 논쟁이 일었습니다.
