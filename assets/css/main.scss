@@ -183,3 +183,14 @@
 .search-hit:hover .search-hit-title { color: #1C9963; }
 .search-hit-meta { display: block; margin-top: .25rem; color: #999; font-size: .8rem; }
 .search-hit-body { display: block; margin-top: .35rem; color: #666; font-size: .9rem; line-height: 1.6; }
+
+.jumbotron.fortags,
+.jumbotron.fortags .col-md-8 {
+	height: auto;
+	background-image: none;
+	background-color: #1a1a1a;
+}
+
+.jumbotron.fortags a {
+	background: #333;
+}

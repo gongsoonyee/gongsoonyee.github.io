@@ -14,7 +14,7 @@
     
 <link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet">
 
-<link href="{{ site.baseurl }}/assets/css/main.css?v=6" rel="stylesheet">
+<link href="{{ site.baseurl }}/assets/css/main.css?v=7" rel="stylesheet">
 
 <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
 
@@ -146,8 +146,20 @@ ga('send', 'pageview');
             {% assign categories_list = nil %}
             {% if site.tags.size > 0 %}
             <div class="explore-tags mt-4">
-                {% for tag in site.tags %}
-                    <a class="mt-1 mb-1" href="{{site.baseurl}}/tags#{{ tag[0] | replace: " ","-" }}">#{{ tag[0] }} ({{ tag[1].size }})</a>
+                {% capture tag_rows %}{% for tag in site.tags %}{{ tag[1].size | plus: 1000 }}|{{ tag[0] }}
+{% endfor %}{% endcapture %}
+                {% assign tag_rows = tag_rows | newline_to_br | split: "<br />" | sort | reverse %}
+                {% assign shown = 0 %}
+                {% for row in tag_rows %}
+                    {% if shown < 12 %}
+                        {% assign parts = row | strip | split: "|" %}
+                        {% assign tag_name = parts | last %}
+                        {% if tag_name != "" %}
+                            {% assign tag_count = parts | first | minus: 1000 %}
+                            <a class="mt-1 mb-1" href="{{site.baseurl}}/tags#{{ tag_name | replace: " ","-" }}">#{{ tag_name }} ({{ tag_count }})</a>
+                            {% assign shown = shown | plus: 1 %}
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
             </div>
             {% endif %}
