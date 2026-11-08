@@ -83,6 +83,12 @@ function lunr_search(term) {
 }
     
 $(function() {
+    $("#lunrsearch").on('keydown', function (e) {
+        if (e.key === 'Enter' && !e.originalEvent.isComposing) {
+            e.preventDefault();
+            lunr_search(this.value);
+        }
+    });
     $("#lunrsearchresults").on('click', '#btnx', function () {
         $('#lunrsearchresults').hide( 5 );
         $( "body" ).removeClass( "modal-open" );
