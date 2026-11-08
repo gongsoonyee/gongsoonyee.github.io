@@ -8,7 +8,7 @@ var documents = [{% for page in site.posts %}{
     "url": {{ page.url | prepend: site.baseurl | prepend: site.url | jsonify }},
     "title": {{ page.title | jsonify }},
     "date": {{ page.date | date: "%Y년 %-m월 %-d일" | jsonify }},
-    "body": {{ page.content | markdownify | replace: '</p>', ' ' | replace: '</h2>', ' ' | replace: '</h3>', ' ' | replace: '</h4>', ' ' | replace: '</li>', ' ' | replace: '<br />', ' ' | replace: '<br>', ' ' | strip_html | strip_newlines | jsonify }}
+    "body": {{ page.content | markdownify | newline_to_br | replace: '<br />', ' ' | replace: '</p>', ' ' | replace: '</h2>', ' ' | replace: '</h3>', ' ' | replace: '</h4>', ' ' | replace: '</li>', ' ' | strip_html | strip_newlines | jsonify }}
 }{% unless forloop.last %}, {% endunless %}{% endfor %}];
 
 var idx = {
