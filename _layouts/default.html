@@ -144,6 +144,13 @@ ga('send', 'pageview');
                 {% endfor %}
             {% endif %}
             {% assign categories_list = nil %}
+            {% if site.tags.size > 0 %}
+            <div class="explore-tags mt-4">
+                {% for tag in site.tags %}
+                    <a class="mt-1 mb-1" href="{{site.baseurl}}/tags#{{ tag[0] | replace: " ","-" }}">#{{ tag[0] }} ({{ tag[1].size }})</a>
+                {% endfor %}
+            </div>
+            {% endif %}
 		</div>
 	</div>
 </div>
