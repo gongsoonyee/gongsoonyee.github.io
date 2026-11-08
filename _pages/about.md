@@ -9,19 +9,17 @@ comments: false
 <style>
 .tl { font-size: 14px; margin: 1.5rem 0 2.5rem; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; }
 .tl-group { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: #888; font-weight: 700; margin: 2.5rem 0 .25rem; }
-.tl-row { display: flex; border-top: 1px solid #f0f0f0; min-width: 0; }
-.tl-label { flex: 0 0 38%; min-width: 0; padding: 12px 16px 12px 0; color: #666; line-height: 1.5; }
+.tl-row { border-top: 1px solid #f0f0f0; padding: 10px 0 8px; }
+.tl-label { padding: 0 0 4px; color: #666; line-height: 1.5; white-space: nowrap; }
 .tl-label strong { color: #222; font-size: 15px; }
-.tl-track { position: relative; flex: 1 1 0; min-width: 0; min-height: 56px; background: repeating-linear-gradient(to right, #eee 0 1px, transparent 1px 12.5%); }
+.tl-track { position: relative; min-height: 28px; background: repeating-linear-gradient(to right, #eee 0 1px, transparent 1px 12.5%); }
 .tl-bar { position: absolute; top: 50%; height: 12px; margin-top: -6px; border-radius: 6px; background: #1C9963; }
 .tl-edu .tl-bar { background: #E8833A; }
 .tl-axis { border-top: 1px solid #ddd; }
 .tl-axis .tl-track { min-height: 28px; background: none; }
 .tl-year { position: absolute; top: 6px; font-size: 12px; color: #888; }
 @media (max-width: 640px) {
-  .tl-row { flex-direction: column; }
-  .tl-label { width: auto; flex: none; padding: 12px 0 0; }
-  .tl-track { min-height: 28px; }
+  .tl-label { white-space: normal; }
 }
 </style>
 
