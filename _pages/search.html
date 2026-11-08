@@ -1,0 +1,43 @@
+---
+layout: default
+title: Search
+permalink: /search/
+search_page: true
+---
+
+<div class="search-page">
+    <form id="search-form" role="search">
+        <div class="search-bar">
+            <svg class="search-bar-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input id="search-input" type="search" placeholder="궁금한 내용을 검색해 보세요" autocomplete="off" enterkeyhint="search">
+            <button type="submit" aria-label="검색"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+    </form>
+
+    <div id="search-idle">
+        <div id="recent-block" hidden>
+            <div class="search-label-row">
+                <span>최근 검색어</span>
+                <button type="button" id="recent-clear">모두 지우기</button>
+            </div>
+            <div id="recent-chips" class="search-chips"></div>
+        </div>
+
+        <p class="search-label">이렇게 찾아보세요</p>
+        <div class="search-chips">
+            <button type="button" class="search-chip search-suggest" data-q="shadcn"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>shadcn</button>
+            <button type="button" class="search-chip search-suggest" data-q="ADsP"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>ADsP</button>
+            <button type="button" class="search-chip search-suggest" data-q="Orca"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Orca</button>
+            <button type="button" class="search-chip search-suggest" data-q="anime.js"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>anime.js</button>
+            <button type="button" class="search-chip search-suggest" data-q="백준"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>백준</button>
+            <button type="button" class="search-chip search-suggest" data-q="Ponytail"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Ponytail</button>
+        </div>
+    </div>
+
+    <div id="search-results" hidden></div>
+</div>
+
+<svg id="icon-clock" hidden viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+
+<script src="{{ site.baseurl }}/assets/js/lunrsearchengine.js?v=4"></script>
+<script src="{{ site.baseurl }}/assets/js/search-page.js?v=1"></script>

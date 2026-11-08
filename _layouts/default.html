@@ -14,7 +14,7 @@
     
 <link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet">
 
-<link href="{{ site.baseurl }}/assets/css/main.css?v=3" rel="stylesheet">
+<link href="{{ site.baseurl }}/assets/css/main.css?v=4" rel="stylesheet">
 
 <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
 
@@ -75,6 +75,10 @@ ga('send', 'pageview');
                 <a class="nav-link" href="{{ site.baseurl }}/about">About me</a>
                 </li>
 
+                <li class="nav-item{% if page.search_page %} active{% endif %}">
+                <a class="nav-link" href="{{ site.baseurl }}/search/">Search</a>
+                </li>
+
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="socialDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Social</a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="socialDropdown">
@@ -83,8 +87,6 @@ ga('send', 'pageview');
                     <a class="dropdown-item" href="{{ site.baseurl }}/feed.xml"><i class="fas fa-rss mr-2"></i>RSS Feed</a>
                 </div>
                 </li>
-
-                {% include search-lunr.html %}
 
             </ul>
 
@@ -103,12 +105,14 @@ ga('send', 'pageview');
 
 <!-- Site Title
 ================================================== -->
+{% unless page.search_page %}
 <div class="mainheading">
     <h1 class="sitetitle">{{ site.name }}</h1>
     <p class="lead">
         {{ site.description }}
     </p>
 </div>
+{% endunless %}
 
 <!-- Content
 ================================================== -->
@@ -120,6 +124,7 @@ ga('send', 'pageview');
 
 <!-- Categories Jumbotron
 ================================================== -->
+{% unless page.search_page %}
 <div class="jumbotron fortags">
 	<div class="d-md-flex h-100">
 		<div class="col-md-4 transpdark align-self-center text-center h-100">
@@ -142,6 +147,7 @@ ga('send', 'pageview');
 		</div>
 	</div>
 </div>
+{% endunless %}
 
 </div> <!-- /.site-content -->
 
