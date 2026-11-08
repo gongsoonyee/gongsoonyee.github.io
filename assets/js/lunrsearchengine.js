@@ -21,15 +21,16 @@ var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or p
     "body": "{{ page.date | date: "%Y/%m/%d" }} - {{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
     }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
 
-var idx = lunr(function () {
-    this.ref('id')
-    this.field('title')
-    this.field('body')
-
-    documents.forEach(function (doc) {
-        this.add(doc)
-    }, this)
-});
+// lunr's tokenizer drops Hangul, so match substrings directly; every word in the query must appear.
+var idx = {
+    search: function (term) {
+        var words = term.toLowerCase().split(/\s+/).filter(Boolean);
+        return documents.filter(function (doc) {
+            var text = (String(doc.title || '') + ' ' + doc.body).toLowerCase();
+            return words.every(function (w) { return text.indexOf(w) !== -1; });
+        }).map(function (doc) { return { ref: doc.id }; });
+    }
+};
 function lunr_search(term) {
     document.getElementById('lunrsearchresults').innerHTML = '<ul></ul>';
     if(term) {
