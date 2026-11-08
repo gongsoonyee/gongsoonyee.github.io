@@ -1,35 +1,14 @@
 ---
 layout: page
-title: Mediumish Template for Jekyll
+title: Seungah Son
 permalink: /about
-comments: true
+comments: false
 ---
 
-<div class="row justify-content-between">
-<div class="col-md-8 pr-5">
+2025년 6월부터 CJ AI Center Insight Modeling Team에서 Jr. Specialist로 일하고 있습니다. 맡은 일은 LLM Agent Engineer입니다.
 
-<p>This website is built with Jekyll and Mediumish template for Jekyll. It's for demonstration purposes, no real content can be found. Mediumish template for Jekyll is compatible with Github pages, in fact even this demo is created with Github Pages and hosted with Github.</p>
+2025년 2월에 KAIST CCS Graduate School of Mobility 석사를 마쳤습니다. 학부는 한양대학교 ERICA College of Computing 컴퓨터 전공이고, 데이터 사이언스와 머신러닝 마이크로 전공을 함께 했습니다.
 
-<p class="mb-5"><img class="shadow-lg" src="{{site.baseurl}}/assets/images/mediumish-jekyll-template.png" alt="jekyll template mediumish" /></p>
-<h4>Documentation</h4>
+ICLR 2025에는 공동저자로 참여했고, ICAIIC 2025에서는 주저자 논문이 Excellent Paper Award를 받았습니다. 그 밖의 논문과 프로젝트는 포트폴리오에 있습니다.
 
-<p>Please, read the docs <a href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/">here</a>.</p>
-
-<h4>Questions or bug reports?</h4>
-
-<p>Head over to our <a href="https://github.com/wowthemesnet/mediumish-theme-jekyll">Github repository</a>!</p>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="sticky-top sticky-top-80">
-<h5>Buy me a coffee</h5>
-
-<p>Thank you for your support! Your donation helps me to maintain and improve <a target="_blank" href="https://github.com/wowthemesnet/mediumish-theme-jekyll">Mediumish <i class="fab fa-github"></i></a>.</p>
-
-<a target="_blank" href="https://www.wowthemes.net/donate/" class="btn btn-danger">Buy me a coffee</a> <a target="_blank" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/" class="btn btn-warning">Documentation</a>
-
-</div>
-</div>
-</div>
+[LinkedIn](https://www.linkedin.com/in/seungahson/) · [Portfolio](https://seungahson.notion.site/Seungah-Son-_-EN-776e15f98a9f43e782f33a37de5edff1)
