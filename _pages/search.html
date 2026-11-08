@@ -25,12 +25,21 @@ search_page: true
 
         <p class="search-label">이렇게 찾아보세요</p>
         <div class="search-chips">
-            <button type="button" class="search-chip search-suggest" data-q="shadcn"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>shadcn</button>
-            <button type="button" class="search-chip search-suggest" data-q="ADsP"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>ADsP</button>
-            <button type="button" class="search-chip search-suggest" data-q="Orca"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Orca</button>
-            <button type="button" class="search-chip search-suggest" data-q="anime.js"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>anime.js</button>
-            <button type="button" class="search-chip search-suggest" data-q="백준"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>백준</button>
-            <button type="button" class="search-chip search-suggest" data-q="Ponytail"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Ponytail</button>
+            {% capture tag_rows %}{% for tag in site.tags %}{{ tag[1].size | plus: 1000 }}|{{ tag[0] }}
+{% endfor %}{% endcapture %}
+            {% assign tag_rows = tag_rows | newline_to_br | replace: "
+", "" | split: "<br />" | sort | reverse %}
+            {% assign shown = 0 %}
+            {% for row in tag_rows %}
+                {% if shown < 6 %}
+                    {% assign parts = row | strip | split: "|" %}
+                    {% assign tag_name = parts | last %}
+                    {% if tag_name != "" %}
+                        <button type="button" class="search-chip search-suggest" data-q="{{ tag_name }}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>{{ tag_name }}</button>
+                        {% assign shown = shown | plus: 1 %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 
