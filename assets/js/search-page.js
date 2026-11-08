@@ -68,6 +68,7 @@
             var body = document.createElement('span');
             body.className = 'search-hit-body';
             var text = String(doc.body || '').replace(/\s+/g, ' ').trim();
+            text = text.replace(/^\d{4}년 \d{1,2}월 \d{1,2}일 · @\S+\s*/, '');
             body.textContent = text.length > 140 ? text.slice(0, 140) + '…' : text;
             link.appendChild(title);
             link.appendChild(meta);
