@@ -7,13 +7,13 @@ comments: false
 
 <div markdown="0">
 <style>
-.tl { font-size: 14px; margin: 1.5rem 0 2.5rem; }
+.tl { font-size: 14px; margin: 1.5rem 0 2.5rem; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; }
 .tl-group { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: #888; font-weight: 700; margin: 2.5rem 0 .25rem; }
-.tl-row { display: flex; border-top: 1px solid #f0f0f0; }
-.tl-label { width: 38%; padding: 12px 16px 12px 0; }
+.tl-row { display: flex; border-top: 1px solid #f0f0f0; min-width: 0; }
+.tl-label { flex: 0 0 38%; min-width: 0; padding: 12px 16px 12px 0; }
 .tl-label strong { display: block; color: #222; font-size: 15px; line-height: 1.4; }
 .tl-label span { display: block; color: #777; font-size: 13px; line-height: 1.5; }
-.tl-track { position: relative; flex: 1; min-height: 56px; background: repeating-linear-gradient(to right, #eee 0 1px, transparent 1px 12.5%); }
+.tl-track { position: relative; flex: 1 1 0; min-width: 0; min-height: 56px; background: repeating-linear-gradient(to right, #eee 0 1px, transparent 1px 12.5%); }
 .tl-bar { position: absolute; top: 50%; height: 12px; margin-top: -6px; border-radius: 6px; background: #1C9963; }
 .tl-edu .tl-bar { background: #E8833A; }
 .tl-axis { border-top: 1px solid #ddd; }
