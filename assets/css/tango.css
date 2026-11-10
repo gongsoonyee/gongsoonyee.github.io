@@ -1,0 +1,60 @@
+.tango { max-width: 440px; margin: 40px auto 80px; color: #242424; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.6; }
+.tango [hidden] { display: none !important; }
+.tango button, .tango input { font: inherit; }
+.tango button { cursor: pointer; border: 1px solid #d9d9d9; border-radius: 7px; padding: 9px 14px; background: #fff; color: #363636; }
+.tango button:hover:not(:disabled) { background: #f5f4f0; border-color: #a5a5a5; }
+.tango button:disabled { cursor: default; color: #666; background: #f3f3f3; }
+.tango button:focus-visible, .tango input:focus-visible, .tango summary:focus-visible { outline: 3px solid #235b9b; outline-offset: 3px; }
+.tango-eyebrow { font-size: 12px; letter-spacing: .16em; color: #727272; font-weight: 700; margin-bottom: 5px; }
+.tango-title-row { display: flex; align-items: baseline; justify-content: space-between; }
+.tango h1 { font-size: 48px; font-weight: 750; letter-spacing: -.06em; margin: 0; line-height: 1.15; }
+.tango h1 span { color: #925b08; }
+.tango-size { color: #666; font-size: 13px; letter-spacing: .1em; }
+.tango-intro { color: #666; font-size: 15px; margin: 12px 0 26px; word-break: keep-all; }
+.tango-date-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.tango-label { margin: 0; color: #666; font-size: 12px; }
+#tango-date-title { font-weight: 600; font-size: 15px; font-variant-numeric: tabular-nums; }
+.tango button.tango-text-button { padding: 6px 0 6px 12px; min-height: 44px; background: transparent; border: 0; text-decoration: underline; text-underline-offset: 3px; font-size: 12px; }
+.tango-board-wrap { position: relative; }
+.tango-board { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); border: 1px solid #aaa69c; border-radius: 9px; overflow: hidden; background: #aaa69c; gap: 1px; }
+.tango button.tango-cell { position: relative; display: flex; align-items: center; justify-content: center; aspect-ratio: 1; min-width: 0; border: 0; border-radius: 0; background: #fff; padding: 10px; color: #242424; }
+.tango button.tango-cell:disabled { background: #f3f1eb; opacity: 1; }
+.tango-cell svg { width: 31px; height: 31px; pointer-events: none; }
+.tango-cell .tango-sun { color: #a66600; }
+.tango-cell .tango-moon { color: #3d6895; }
+.tango-fixed-dot { position: absolute; width: 4px; height: 4px; bottom: 5px; right: 5px; background: #868277; border-radius: 50%; }
+.tango button.tango-cell.is-conflict { box-shadow: inset 0 0 0 2px #b8372b; }
+.tango-conflict-mark { position: absolute; top: 1px; left: 4px; font-size: 12px; color: #a52a20; font-weight: 700; }
+.tango button.tango-cell:focus-visible { outline-offset: -4px; z-index: 2; }
+.tango-edges { position: absolute; inset: 0; pointer-events: none; }
+.tango-edge { position: absolute; transform: translate(-50%,-50%); background: #fbfaf6; border: 1px solid #d9d6cf; width: 18px; height: 18px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 14px; line-height: 1; font-weight: 700; color: #3b3932; }
+.tango-instruction { font-size: 13px; color: #666; margin: 10px 0 16px; text-align: center; }
+.tango-status-row { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; min-height: 34px; font-size: 13px; }
+#tango-status { margin: 0; word-break: keep-all; }
+#tango-progress { color: #666; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tango-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.tango-actions button { font-size: 13px; min-height: 44px; padding: 8px 6px; }
+#tango-hints { font-size: 12px; color: #666; margin-left: 3px; }
+.tango-notice, .tango-confirm { font-size: 12px; padding: 12px; background: #faf6eb; border-left: 2px solid #b47e20; margin: 12px 0; word-break: keep-all; }
+.tango-confirm p { margin: 0 0 10px; }
+.tango-confirm button { font-size: 12px; margin: 0 5px 4px 0; }
+.tango-rules { border-top: 1px solid #e7e7e7; margin-top: 25px; padding-top: 12px; font-size: 14px; color: #666; }
+.tango-rules summary { color: #333; cursor: pointer; padding: 10px 0; min-height: 44px; font-weight: 600; }
+.tango-rules ol { padding-left: 20px; margin-top: 14px; }
+.tango-rules li { margin-bottom: 8px; }
+.tango-rules p { margin: 0; }
+.tango-archive { border-top: 1px solid #e7e7e7; margin-top: 19px; padding-top: 20px; display: flex; align-items: center; gap: 12px; justify-content: space-between; }
+.tango-archive h2 { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
+.tango-archive p { font-size: 12px; color: #666; margin: 0; }
+.tango-archive label { font-size: 12px; color: #666; margin: 0; }
+.tango input[type="date"] { display: block; background: #fff; color: #333; border: 1px solid #d9d9d9; padding: 9px; border-radius: 6px; width: 154px; min-height: 44px; font-size: 12px; }
+.tango-footnote { color: #666; font-size: 12px; margin-top: 20px; line-height: 1.8; }
+@media (max-width: 480px) { .tango { margin-top: 20px; } .tango h1 { font-size: 42px; } .tango-intro { margin-bottom: 20px; } .tango-cell svg { width: 27px; height: 27px; } .tango-archive { gap: 8px; } .tango-archive p { max-width: 150px; } }
+
+/* This stylesheet is loaded only on the game page. */
+/* The theme script measures the first header; the game header is content, not navigation. */
+.game-page .site-content { margin-top: 64px !important; }
+.navbar-brand, .navbar-toggler { min-height: 44px; }
+.navbar-light .navbar-nav .nav-link { min-height: 44px; color: #666; }
+.navbar-light .navbar-nav .active > .nav-link { color: #222; }
+@media (prefers-reduced-motion: reduce) { .mediumnavigation, .site-content { transition: none; } }
