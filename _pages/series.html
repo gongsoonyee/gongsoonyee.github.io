@@ -1,30 +1,7 @@
 ---
-layout: default
-title: Series
+layout: null
+title: 주제별 글 모음
 permalink: /series/
-series_page: true
 ---
-<main class="reading-index" lang="ko">
-  <p class="reading-label">READ BY TOPIC</p>
-  <h1>Series</h1>
-  <p class="reading-intro">궁금한 주제부터, 연결해서 읽어 보세요.</p>
-  <nav class="reading-jump" aria-label="주제 바로가기">
-    {% for topic in site.data.reading %}<a href="#topic-{{ forloop.index }}">{{ topic.title }}</a>{% endfor %}
-  </nav>
-  {% for topic in site.data.reading %}
-  <section class="reading-topic" id="topic-{{ forloop.index }}">
-    <h2><span>{{ forloop.index }}.</span> {{ topic.title }}</h2>
-    {% for group in topic.groups %}
-    <section class="reading-group" id="{{ group.id }}">
-      <h3>{{ group.title }}{% if group.sequential %}<span class="reading-badge">시리즈 · 추천 순서</span>{% endif %}</h3>
-      <ol>
-        {% for post_id in group.posts %}
-        {% assign entry = site.posts | where: 'id', post_id | first %}
-        {% if entry %}<li><a href="{{ entry.url | relative_url }}">{{ entry.title }}</a><time datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: '%Y.%m.%d' }}</time></li>{% endif %}
-        {% endfor %}
-      </ol>
-    </section>
-    {% endfor %}
-  </section>
-  {% endfor %}
-</main>
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>주제별 글 모음</title><link rel="canonical" href="{{ '/' | absolute_url }}"><meta http-equiv="refresh" content="0;url={{ '/' | relative_url }}"></head><body><p>주제별 목차가 <a href="{{ '/' | relative_url }}">메인 화면</a>으로 이동했어요.</p><script>window.location.replace({{ '/' | relative_url | jsonify }} + window.location.hash);</script></body></html>

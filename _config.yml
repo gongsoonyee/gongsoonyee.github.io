@@ -33,14 +33,10 @@ authors:
 
 # Plugins
 plugins:
-  - jekyll-paginate
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-seo-tag
 
-# Pagination 
-paginate: 6
-paginate_path: /page:num/
     
 # Other
 markdown: kramdown

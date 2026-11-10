@@ -2,7 +2,7 @@
 {% for group in topic.groups %}
 {% if group.sequential and group.posts contains page.id %}
 <nav class="reading-series" aria-label="{{ group.title | escape }} 시리즈">
-  <a class="reading-label" href="{{ '/series/' | relative_url }}#{{ group.id }}">시리즈</a>
+  <a class="reading-label" href="{{ '/' | relative_url }}#{{ group.id }}">시리즈</a>
   <h2>{{ group.title }}</h2>
   <ol>
     {% assign previous_entry = nil %}{% assign next_entry = nil %}{% assign found_current = false %}
