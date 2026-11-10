@@ -6,23 +6,28 @@ title: Home
   <div class="section-title"><h2><span>Featured</span></h2></div>
   <div class="row">{% for post in site.posts %}{% if post.featured %}{% include featuredbox.html %}{% endif %}{% endfor %}</div>
 </section>
-<section class="home-categories" aria-label="주제별 글 선택">
-  <div class="section-title"><h2><span>Categories</span></h2></div>
+<section class="home-categories" aria-label="인기 태그별 글 선택">
+  <div class="section-title"><h2><span>Popular Tags</span></h2></div>
   <button type="button" class="category-all" data-topic="all" aria-pressed="true">전체 글</button>
   <div class="category-options">
-  {% for topic in site.data.reading %}
-    {% assign topic_number = forloop.index %}
-    {% assign latest = nil %}
-    {% for candidate in site.posts %}
-      {% assign belongs = false %}
-      {% for group in topic.groups %}{% if group.posts contains candidate.id %}{% assign belongs = true %}{% endif %}{% endfor %}
-      {% if belongs and latest == nil %}{% assign latest = candidate %}{% endif %}
-    {% endfor %}
-    <button type="button" class="category-option" data-topic="{{ topic_number }}" aria-pressed="false">
+  {% capture ranked_tags %}{% for tag in site.tags %}{% assign latest = tag[1] | sort: 'date' | last %}{{ tag[1].size | plus: 100000 }}|{{ latest.date | date: '%Y%m%d%H%M%S' }}|{{ tag[0] }}
+{% endfor %}{% endcapture %}
+  {% assign tag_rows = ranked_tags | newline_to_br | replace: '
+', '' | split: '<br />' | sort | reverse %}
+  {% assign tag_count = 0 %}
+  {% for row in tag_rows %}
+    {% assign parts = row | strip | split: '|' %}
+    {% assign tag_name = parts | last | strip %}
+    {% if tag_name != '' and tag_count < 6 %}
+    {% assign tagged_posts = site.tags[tag_name] | sort: 'date' | reverse %}
+    {% assign latest = tagged_posts | first %}
+    <button type="button" class="category-option" data-topic="{{ tag_name | escape }}" aria-pressed="false">
       {% if latest.image %}<img src="{% if latest.image contains '://' %}{{ latest.image }}{% else %}{{ latest.image | relative_url }}{% endif %}" alt="{{ latest.title | escape }}" loading="lazy">{% else %}<span class="category-cover">{{ latest.cover | default: latest.title }}</span>{% endif %}
-      <span class="category-name">{{ topic.title }}</span>
+      <span class="category-name">#{{ tag_name }} <small>{{ tagged_posts.size }}개</small></span>
       <span class="category-latest">{{ latest.title }}</span>
     </button>
+    {% assign tag_count = tag_count | plus: 1 %}
+    {% endif %}
   {% endfor %}
   </div>
 </section>
@@ -32,10 +37,9 @@ title: Home
   <div class="row listrecent">
   {% for post in site.posts %}
     {% unless post.featured %}
-      {% capture topic_ids %}{% for topic in site.data.reading %}{% assign topic_number = forloop.index %}{% for group in topic.groups %}{% if group.posts contains post.id %}{{ topic_number }} {% endif %}{% endfor %}{% endfor %}{% endcapture %}
-      {% include postbox.html home_topics=topic_ids %}
+      {% include postbox.html home_tags=post.tags %}
     {% endunless %}
   {% endfor %}
   </div>
 </section>
-<script src="{{ '/assets/js/home-categories.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/home-categories.js' | relative_url }}?v=2"></script>

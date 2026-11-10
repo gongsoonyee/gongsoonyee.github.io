@@ -235,7 +235,7 @@
   .reading-neighbors { flex-direction: column; gap: 8px; }
 }
 
-.category-options { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; margin: 16px 0 32px; }
+.category-options { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; margin: 16px 0 32px; }
 .category-option { border: 1px solid #ddd; border-radius: 4px; padding: 0; background: white; text-align: left; overflow: hidden; cursor: pointer; color: #333; }
 .category-option img, .category-cover { width: 100%; height: 130px; object-fit: cover; display: flex; align-items: center; justify-content: center; }
 .category-cover { padding: 16px; background: #222; color: white; font-size: 14px; }
