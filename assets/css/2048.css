@@ -1,0 +1,29 @@
+.game-2048 .tango-intro { margin-bottom: 18px; }
+.scores-2048 { display: flex; align-items: center; gap: 22px; margin-bottom: 14px; }
+.scores-2048 > div { display: flex; flex-direction: column; min-width: 64px; }
+.scores-2048 span { font-size: 12px; color: #666; }
+.scores-2048 strong { font-size: 23px; line-height: 1.35; font-variant-numeric: tabular-nums; }
+.scores-2048 button { margin-left: auto; min-height: 44px; font-size: 13px; }
+#board-2048 { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; padding: 8px; border-radius: 10px; background: #aaa095; touch-action: none; user-select: none; -webkit-user-select: none; scroll-margin-top: 85px; }
+#board-2048:focus-visible { outline: 3px solid #235b9b; outline-offset: 4px; }
+.tile-2048 { display: flex; align-items: center; justify-content: center; aspect-ratio: 1; min-width: 0; border-radius: 5px; background: #d4ccc3; color: #443b32; font-size: 38px; font-weight: 750; line-height: 1; font-variant-numeric: tabular-nums; }
+.tile-2048[data-value="2"] { background: #eee8de; }
+.tile-2048[data-value="4"] { background: #eee0c7; }
+.tile-2048[data-value="8"] { background: #eeb67c; }
+.tile-2048[data-value="16"] { background: #e99b66; }
+.tile-2048[data-value="32"] { background: #e3815c; color: #291c16; }
+.tile-2048[data-value="64"] { background: #af4f32; color: #fff; }
+.tile-2048[data-large="true"] { background: #755124; color: #fff; font-size: 30px; }
+.tile-2048[data-huge="true"] { background: #39332c; color: #fff; font-size: 23px; }
+.game-2048 .tango-instruction { font-size: 12px; margin: 10px 0; word-break: keep-all; }
+#status-2048 { min-height: 23px; margin: 0 0 10px; font-size: 13px; word-break: keep-all; }
+.controls-2048 { display: flex; align-items: center; gap: 8px; }
+.controls-2048 > button { flex: 1; font-size: 13px; }
+.directions-2048 { display: grid; grid-template-columns: repeat(4,44px); gap: 5px; }
+.game-2048 button { min-height: 44px; }
+.directions-2048 button { padding: 5px; font-size: 21px; }
+.finish-2048 { display: flex; gap: 8px; margin: 0 0 12px; }
+.finish-2048 button { flex: 1; font-size: 13px; }
+.game-2048 .tango-footnote a { color: #246c49; text-decoration: underline; }
+@media (max-width: 480px) { .tile-2048 { font-size: 32px; } .tile-2048[data-large="true"] { font-size: 25px; } .tile-2048[data-huge="true"] { font-size: 19px; } .scores-2048 { gap: 16px; } }
+@media (max-width: 340px) { .directions-2048 { grid-template-columns: repeat(4,44px); gap: 2px; } .controls-2048 { gap: 4px; } .controls-2048 > button { padding: 8px 3px; } }

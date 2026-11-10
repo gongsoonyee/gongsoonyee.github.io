@@ -57,3 +57,15 @@ Keep generator algorithms and their versioned snapshot tests stable. Changing a
 generator must introduce a new version with an explicit date cutoff and save-key
 migration; never silently change previously published dates. Shikaku and Zip use
 `grid-puzzle-engine.js`; Tango uses `tango-engine.js`.
+
+### 2048
+
+`/mini-games/2048/` is a continuous free-play game. Use the focused board's arrow
+keys or WASD, swipe on the board, or use the direction buttons. Progress and best
+score are stored locally; changing dates does not reset a game. Starting a new
+game keeps the best score. After making 2048, choose to continue toward larger
+tiles. A successful move spawns one new tile; a move that changes nothing does not.
+
+```sh
+PLAYWRIGHT_MODULE=/path/to/playwright node tests/2048-browser.cjs
+```

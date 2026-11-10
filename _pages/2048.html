@@ -1,0 +1,32 @@
+---
+layout: default
+title: 2048 · Mini Games
+permalink: /mini-games/2048/
+game_page: true
+game_id: '2048'
+---
+<link rel="stylesheet" href="{{ '/assets/css/tango.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/2048.css' | relative_url }}">
+<main class="tango game-2048" id="twenty48" lang="ko">
+    <header class="tango-heading">
+        <p class="tango-eyebrow">MINI GAMES / NUMBER GAME</p>
+        <div class="tango-title-row"><h1>2048<span aria-hidden="true">.</span></h1><span class="tango-size">4 × 4</span></div>
+        <p class="tango-intro">같은 숫자를 합쳐 2048을 만들어 보세요.</p>
+    </header>
+    <noscript><p>이 게임을 플레이하려면 JavaScript를 켜 주세요.</p></noscript>
+    <p id="error-2048" hidden role="alert">게임을 준비하지 못했어요. 페이지를 새로고침해 주세요.</p>
+    <div id="play-2048" hidden>
+        <div class="scores-2048"><div><span>점수</span><strong id="score-2048">0</strong></div><div><span>최고 기록</span><strong id="best-2048">0</strong></div><button type="button" id="new-2048">새 게임</button></div>
+        <div id="board-2048" tabindex="0" role="group" aria-label="2048, 4행 4열 게임판" aria-describedby="instruction-2048"></div>
+        <p class="tango-instruction" id="instruction-2048">게임판을 누르고 방향키·WASD, 또는 스와이프로 움직여요.</p>
+        <p id="status-2048" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div id="finish-2048" class="finish-2048" hidden><button type="button" id="continue-2048" hidden>계속 플레이</button><button type="button" id="restart-2048">새 게임</button></div>
+        <div class="controls-2048"><button type="button" id="undo-2048">되돌리기</button><div class="directions-2048" role="group" aria-label="이동 방향"><button type="button" data-direction="left" aria-label="왼쪽으로 이동">←</button><button type="button" data-direction="up" aria-label="위로 이동">↑</button><button type="button" data-direction="down" aria-label="아래로 이동">↓</button><button type="button" data-direction="right" aria-label="오른쪽으로 이동">→</button></div></div>
+        <div id="confirm-2048" class="tango-confirm" hidden><p>현재 게임을 지우고 새로 시작할까요? 최고 기록은 남아요.</p><button type="button" id="cancel-2048">계속 플레이</button><button type="button" id="reset-2048">새로 시작</button></div>
+        <p id="storage-2048" class="tango-notice" hidden role="status">브라우저에 기록을 저장할 수 없어요. 지금은 계속 플레이할 수 있지만 새로고침하면 기록이 사라질 수 있어요.</p>
+        <details class="tango-rules"><summary>플레이 방법</summary><ol><li>한 방향으로 밀면 모든 타일이 함께 움직여요.</li><li>같은 숫자 두 개가 만나면 합쳐지고, 합쳐진 숫자만큼 점수가 올라요. 타일 하나는 한 번의 이동에서 한 번만 합쳐져요.</li><li>움직일 때마다 빈칸에 2 또는 4가 하나 생겨요. 더 움직일 수 없으면 게임이 끝나요.</li><li>2048을 만든 뒤에도 계속 플레이할 수 있어요. 되돌리기는 이번 방문의 최근 100번 이동까지 가능해요.</li></ol></details>
+        <p class="tango-footnote">날짜가 바뀌어도 이어서 플레이할 수 있어요.<br>진행 상태와 최고 기록은 이 브라우저에 저장돼요.<br>Original game by <a href="https://github.com/gabrielecirulli/2048">Gabriele Cirulli</a>.</p>
+    </div>
+</main>
+<script src="{{ '/assets/js/2048-engine.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/2048.js' | relative_url }}" defer></script>
