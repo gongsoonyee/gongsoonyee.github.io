@@ -248,3 +248,11 @@
 [data-home-topics][hidden], #home-featured[hidden] { display: none !important; }
 #home-count { font-size: 14px; color: #666; }
 @media (max-width: 767px) { .category-options { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; } }
+
+.home-pagination { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 24px 0 48px; }
+.home-pagination[hidden] { display: none; }
+.home-pagination button { min-width: 44px; min-height: 44px; border: 1px solid #ccc; background: white; color: #333; border-radius: 4px; cursor: pointer; padding: 8px 12px; }
+.home-pagination button[aria-current="page"] { background: #333; color: white; }
+.home-pagination button:disabled { color: #777; cursor: default; background: #f3f3f3; }
+.home-pagination button:focus-visible { outline: 3px solid #235b9b; outline-offset: 3px; }
+#home-stories { scroll-margin-top: 80px; }
