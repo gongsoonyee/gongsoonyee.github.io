@@ -22,6 +22,14 @@ Copyright (C) 2019 Sal, https://www.wowthemes.net
 
 Thank you!
 
+### Reading topics and series
+
+`/series/` lists articles by topic. Edit `_data/reading.yml` to change groups or
+reading order. Post IDs are the site's existing slug IDs (for example
+`/andrej-karpathy-skills`). A group with `sequential: true` adds a series list,
+current-article marker and previous/next links below each member article.
+Grouping does not change article content, publication dates or URLs.
+
 ### Daily mini games
 
 The header's **Mini Games** menu opens Tango, Shikaku, or Zip under

@@ -1,0 +1,48 @@
+- title: AI와 개발
+  groups:
+    - id: coding-agents
+      title: AI 코딩 에이전트 활용기
+      sequential: true
+      posts:
+        - /andrej-karpathy-skills
+        - /orca-multi-agent-guide
+        - /coding-agent-skills
+    - id: ui-visualization
+      title: UI와 시각화
+      posts:
+        - /shadcn-ui-vs-daangn-seed
+        - /visualization-animation-libraries
+- title: 연구와 대학원
+  groups:
+    - id: research-tools
+      title: 연구 도구
+      posts:
+        - /research-tools-for-masters
+    - id: conferences
+      title: 학회 이야기
+      posts:
+        - /icml-2026-review
+        - /iclr-2027-submission-cap
+- title: 개발 도구와 블로그
+  groups:
+    - id: security
+      title: 보안·OSINT
+      posts:
+        - /maigret-osint
+    - id: blogging
+      title: 블로그 운영
+      posts:
+        - /github-pages-is-a-dev-domain
+- title: 경험과 회고
+  groups:
+    - id: experiences
+      title: 대회·전시·서비스 후기
+      posts:
+        - /claude-customer-support-agent
+        - /aiot-korea-exhibition
+        - /pickle-ai-agent-review
+    - id: study-essays
+      title: 공부와 회고
+      posts:
+        - /adsp-50-pass-review
+        - /baekjoon-service-end

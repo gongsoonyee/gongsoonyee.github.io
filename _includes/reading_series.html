@@ -1,0 +1,29 @@
+{% for topic in site.data.reading %}
+{% for group in topic.groups %}
+{% if group.sequential and group.posts contains page.id %}
+<nav class="reading-series" aria-label="{{ group.title | escape }} 시리즈">
+  <a class="reading-label" href="{{ '/series/' | relative_url }}#{{ group.id }}">시리즈</a>
+  <h2>{{ group.title }}</h2>
+  <ol>
+    {% assign previous_entry = nil %}{% assign next_entry = nil %}{% assign found_current = false %}
+    {% for post_id in group.posts %}
+    {% assign entry = site.posts | where: 'id', post_id | first %}
+    {% if entry %}
+      {% if entry.id == page.id %}
+        <li class="is-current"><span aria-current="page">{{ entry.title }} <small>지금 읽는 글</small></span></li>
+        {% assign found_current = true %}
+      {% else %}
+        <li><a href="{{ entry.url | relative_url }}">{{ entry.title }}</a></li>
+        {% if found_current == false %}{% assign previous_entry = entry %}{% elsif next_entry == nil %}{% assign next_entry = entry %}{% endif %}
+      {% endif %}
+    {% endif %}
+    {% endfor %}
+  </ol>
+  <div class="reading-neighbors">
+    {% if previous_entry %}<a rel="prev" href="{{ previous_entry.url | relative_url }}"><small>← 이전 글</small>{{ previous_entry.title }}</a>{% endif %}
+    {% if next_entry %}<a rel="next" href="{{ next_entry.url | relative_url }}"><small>다음 글 →</small>{{ next_entry.title }}</a>{% endif %}
+  </div>
+</nav>
+{% endif %}
+{% endfor %}
+{% endfor %}
