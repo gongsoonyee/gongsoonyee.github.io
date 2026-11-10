@@ -78,5 +78,38 @@
     visit(0);
     return { count, solution: first };
   }
-  return { SIZE, dayKey, addDays, validDate, conflicts, complete, solve };
+  const GENERATOR_VERSION = 'daily-v1';
+  function generate(date) {
+    if (!validDate(date)) throw new TypeError('Invalid puzzle date');
+    let seed = 2166136261;
+    for (const ch of 'tango:' + GENERATOR_VERSION + ':' + date) seed = Math.imul(seed ^ ch.charCodeAt(0), 16777619) >>> 0;
+    function random() {
+      seed = seed + 0x6D2B79F5 | 0;
+      let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+    function shuffle(items) {
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
+      return items;
+    }
+    const solution = solve(Array(36).fill(0), [], 1, random).solution;
+    const neighbors = [];
+    for (let a = 0; a < 36; a++) {
+      if (a % 6 < 5) neighbors.push([a, a + 1]);
+      if (a < 30) neighbors.push([a, a + 6]);
+    }
+    const edges = shuffle(neighbors).slice(0, 8).map(([a, b]) => [a, b, Number(solution[a] === solution[b])]);
+    const givens = solution.slice();
+    for (const i of shuffle(Array.from({ length: 36 }, (_, n) => n))) {
+      if (givens.filter(Boolean).length <= 7) break;
+      givens[i] = 0;
+      if (solve(givens, edges).count !== 1) givens[i] = solution[i];
+    }
+    return { version: GENERATOR_VERSION, givens, edges, solution };
+  }
+  return { SIZE, dayKey, addDays, validDate, conflicts, complete, solve, generate, GENERATOR_VERSION };
 });

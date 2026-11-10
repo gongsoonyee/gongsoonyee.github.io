@@ -3,9 +3,10 @@ layout: default
 title: Tango · Mini Games
 permalink: /mini-games/tango/
 game_page: true
+game_id: tango
 ---
 <link rel="stylesheet" href="{{ '/assets/css/tango.css' | relative_url }}">
-<main class="tango" id="tango" lang="ko" data-bank-url="{{ '/assets/data/tango.json' | relative_url }}">
+<main class="tango" id="tango" lang="ko" data-bank-url="{{ '/assets/data/tango.json' | relative_url }}?v=legacy-10">
     <header class="tango-heading">
         <p class="tango-eyebrow">MINI GAMES / DAILY LOGIC</p>
         <div class="tango-title-row"><h1>Tango<span aria-hidden="true">.</span></h1><span class="tango-size">6 × 6</span></div>
@@ -29,5 +30,5 @@ game_page: true
         <p class="tango-footnote">매일 한국 시간 자정에 새 퍼즐 · 기록은 이 브라우저에 저장돼요.<br><span id="tango-coverage"></span></p>
     </div>
 </main>
-<script src="{{ '/assets/js/tango-engine.js' | relative_url }}" defer></script>
-<script src="{{ '/assets/js/tango.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/tango-engine.js' | relative_url }}?v=daily-v1" defer></script>
+<script src="{{ '/assets/js/tango.js' | relative_url }}?v=2" defer></script>

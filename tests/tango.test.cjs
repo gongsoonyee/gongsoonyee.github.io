@@ -46,8 +46,9 @@ test('KST date changes exactly at 15:00 UTC, regardless of host timezone', () =>
   assert.equal(E.validDate('2026-13-01'), false);
 });
 
-test('entire scheduled bank has valid distinct solutions and exactly one solution each', () => {
-  assert.equal(bank.puzzles.length, 400);
+test('published legacy archive has valid distinct solutions and exactly one solution each', () => {
+  assert.equal(bank.puzzles.length, 10);
+  assert.equal(require('node:crypto').createHash('sha256').update(JSON.stringify(bank)).digest('hex'), 'add3213913ba10fb16250ac5945a1b0c96094f9d94492e29f43f53219bf91242');
   const seen = new Set();
   for (const [index, p] of bank.puzzles.entries()) {
     assert.equal(p.givens.length, 36);
@@ -68,6 +69,32 @@ test('entire scheduled bank has valid distinct solutions and exactly one solutio
     seen.add(p.solution.join(''));
     assert.equal(countSolutions(p), 1, `non-unique puzzle at ${index}`);
     assert(E.complete(p.solution, p.edges));
+  }
+});
+
+test('date-generated Tango is deterministic, unique-solution, and not limited to the old bank', () => {
+  const crypto = require('node:crypto');
+  const golden = {
+    '2026-11-11': '249e8e5ab2a67d06021c79d6d35db4349caf9ef083c8604db4d2f9b5c624e3d6',
+    '2040-02-29': 'c1e9b0f8b0022622a90991352230da17b1dbf45883bbf0017184947292cdb1ad'
+  };
+  for (const [date, hash] of Object.entries(golden)) {
+    const puzzle = E.generate(date);
+    assert.equal(crypto.createHash('sha256').update(JSON.stringify(puzzle)).digest('hex'), hash);
+    assert.equal(puzzle.version, 'daily-v1');
+    assert.equal(countSolutions(puzzle), 1);
+  }
+  assert.throws(() => E.generate('2027-02-29'), /Invalid/);
+  let previous;
+  for (let day = 0; day < 366; day++) {
+    const date = E.addDays('2026-11-11', day);
+    const puzzle = E.generate(date);
+    assert.deepEqual(puzzle, E.generate(date));
+    assert.equal(countSolutions(puzzle), 1, date);
+    assert(E.complete(puzzle.solution, puzzle.edges), date);
+    const signature = JSON.stringify([puzzle.givens, puzzle.edges]);
+    assert.notEqual(signature, previous, date);
+    previous = signature;
   }
 });
 

@@ -1,0 +1,35 @@
+---
+layout: default
+title: Zip · Mini Games
+permalink: /mini-games/zip/
+game_page: true
+game_id: zip
+---
+<link rel="stylesheet" href="{{ '/assets/css/tango.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/grid-games.css' | relative_url }}">
+<main class="tango grid-game" id="grid-game" lang="ko" data-game="zip">
+    <header class="tango-heading">
+        <p class="tango-eyebrow">MINI GAMES / DAILY LOGIC</p>
+        <div class="tango-title-row"><h1>Zip<span aria-hidden="true">.</span></h1><span class="tango-size">6 × 6</span></div>
+        <p class="tango-intro">숫자를 순서대로 잇고, 모든 칸을 지나가세요.</p>
+    </header>
+    <div id="game-loading" role="status">오늘의 퍼즐을 준비하고 있어요.</div>
+    <div id="game-error" hidden role="alert"><p>퍼즐을 준비하지 못했어요. 다시 시도하거나 페이지를 새로고침해 주세요.</p><button type="button" id="game-retry">다시 시도</button></div>
+    <noscript><p>이 게임을 플레이하려면 JavaScript를 켜 주세요.</p></noscript>
+    <div id="game-play" hidden>
+        <div class="tango-date-row"><div><p id="game-day-label" class="tango-label">오늘의 퍼즐</p><time id="game-date-title"></time></div><button type="button" id="game-today" class="tango-text-button">오늘로 돌아가기</button></div>
+        <p id="game-notice" class="tango-notice" hidden></p>
+        <p id="game-new-day" class="tango-notice" hidden>새로운 오늘의 퍼즐이 열렸어요. 현재 퍼즐은 그대로 이어서 풀 수 있어요. <button type="button" id="game-new-today" class="tango-text-button">오늘의 퍼즐 열기</button></p>
+        <div class="tango-board-wrap grid-board-wrap"><div id="game-board" class="tango-board grid-board" role="group" aria-label="Zip 6행 6열 퍼즐" aria-describedby="game-instruction"></div><svg id="game-path" class="grid-path" viewBox="0 0 600 600" aria-hidden="true"></svg></div>
+        <p id="game-instruction" class="tango-instruction">1에서 시작해 이웃한 칸을 누르거나 드래그해 길을 이어요.</p>
+        <div class="tango-status-row"><p id="game-status" role="status" aria-live="polite" aria-atomic="true"></p><span id="game-progress"></span></div>
+        <div class="tango-actions"><button type="button" id="game-undo">되돌리기</button><button type="button" id="game-hint">힌트 <span id="game-hints">0</span></button><button type="button" id="game-reset">처음부터</button></div>
+        <div id="game-reset-confirm" class="tango-confirm" hidden><p>이 날짜의 진행 상태와 힌트 횟수를 지울까요?</p><div><button type="button" id="game-reset-cancel">계속 풀기</button><button type="button" id="game-reset-yes">지우고 다시 시작</button></div></div>
+        <p id="game-storage-warning" class="tango-notice" hidden role="status">브라우저에 기록을 저장할 수 없어요. 이 화면에서는 계속 플레이할 수 있지만, 새로고침하면 진행 상태가 사라질 수 있어요.</p>
+        <details class="tango-rules"><summary>플레이 방법</summary><ol><li><strong>1</strong>에서 시작해 모든 칸을 한 번씩 지나가세요.</li><li>숫자가 있는 칸은 <strong>순서대로</strong> 지나가야 해요.</li><li>가로·세로로만 이동할 수 있어요. 대각선 이동은 안 돼요.</li></ol><p>이미 지나온 칸을 누르면 그 칸까지 되돌아가요. 힌트는 경로를 정답 방향으로 한 칸 이어줘요. 다른 길로 갔다면 맞는 지점까지 되돌린 후 이어줘요.</p></details>
+        <section class="tango-archive" aria-labelledby="game-archive-title"><div><h2 id="game-archive-title">지난 퍼즐</h2><p>놓친 하루도 천천히 풀어 보세요.</p></div><label for="game-date">퍼즐 날짜 <input type="date" id="game-date"></label></section>
+        <p class="tango-footnote">매일 한국 시간 자정에 새 퍼즐 · 기록은 이 브라우저에 저장돼요.<br>같은 날짜에는 모두 같은 퍼즐을 풀어요.</p>
+    </div>
+</main>
+<script src="{{ '/assets/js/grid-puzzle-engine.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/grid-games.js' | relative_url }}" defer></script>

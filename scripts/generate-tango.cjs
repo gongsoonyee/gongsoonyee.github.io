@@ -1,4 +1,5 @@
-// Offline puzzle authoring. Run: node scripts/generate-tango.cjs
+// Reproduce only the published legacy archive. New dates use TangoEngine.generate(date).
+// Keep this sequence unchanged so existing saved games retain their original puzzle.
 const fs = require('node:fs');
 const path = require('node:path');
 const E = require('../assets/js/tango-engine.js');
@@ -17,7 +18,7 @@ function shuffle(items) {
   return items;
 }
 const puzzles = [], seen = new Set();
-while (puzzles.length < 400) {
+while (puzzles.length < 10) {
   const solution = E.solve(Array(36).fill(0), [], 1, random).solution;
   if (seen.has(solution.join(''))) continue;
   const neighbors = [];

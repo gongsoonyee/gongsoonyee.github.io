@@ -22,24 +22,38 @@ Copyright (C) 2019 Sal, https://www.wowthemes.net
 
 Thank you!
 
-### Daily Tango
+### Daily mini games
 
-The header's **Mini Games → Tango** entry opens `/mini-games/tango/`.
-Puzzles change at midnight in **Asia/Seoul**. Progress and hint counts are saved
-per date in the current browser; no account or backend is required.
+The header's **Mini Games** menu opens Tango, Shikaku, or Zip under
+`/mini-games/{game}/`. Puzzles change at midnight in **Asia/Seoul**.
+Progress and hint counts are saved per game/date in the current browser;
+no account or backend is required.
 
-The committed bank (`assets/data/tango.json`) contains 400 independently verified,
-unique-solution puzzles for **2026-11-01 through 2027-12-05**. Past dates remain
-playable. Extend the bank before its last date; the game does not silently repeat
-puzzles after coverage ends.
+New puzzles are generated in the browser from a stable hash of the game name,
+generator version, and ISO date. There is no scheduled bank to replenish.
+Solvers check uniqueness during generation; generation uses deterministic work
+limits rather than wall-clock timing, so slow and fast devices see the same puzzle.
+Past dates regenerate the same puzzle. These are locally authored puzzles,
+not puzzles fetched from LinkedIn or another game provider.
+
+Tango retains the already published **2026-11-01 through 2026-11-10** archive
+in `assets/data/tango.json`, along with its existing `v1` save keys. From
+**2026-11-11**, it uses generator `daily-v1` and separate save keys.
+`node scripts/generate-tango.cjs` only reproduces that immutable legacy archive.
 
 ```sh
-node --test tests/tango.test.cjs
+node --test tests/*.test.cjs
 ```
 
-`node scripts/generate-tango.cjs` deterministically recreates the initial bank.
-To extend coverage, increase the generation count while preserving the seed and
-start date, then update the expected bank size in the test and rerun it. Preserve
-published puzzle order and givens so existing saved games keep the same puzzles.
-To change already published puzzles, also migrate the storage version in
-`assets/js/tango.js`. The tests independently count solutions for the entire bank.
+Browser integration checks use an externally installed Playwright against a local
+Jekyll build (no npm runtime dependency is added to the blog):
+
+```sh
+PLAYWRIGHT_MODULE=/path/to/playwright node tests/tango-browser.cjs
+PLAYWRIGHT_MODULE=/path/to/playwright node tests/grid-games-browser.cjs
+```
+
+Keep generator algorithms and their versioned snapshot tests stable. Changing a
+generator must introduce a new version with an explicit date cutoff and save-key
+migration; never silently change previously published dates. Shikaku and Zip use
+`grid-puzzle-engine.js`; Tango uses `tango-engine.js`.

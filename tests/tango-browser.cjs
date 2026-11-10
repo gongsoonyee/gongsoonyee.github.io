@@ -4,6 +4,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const bank = require('../assets/data/tango.json');
+const engine = require('../assets/js/tango-engine.js');
 const url = (process.env.TANGO_TEST_URL || 'http://127.0.0.1:4010') + '/mini-games/tango/';
 const output = process.env.TANGO_SCREENSHOTS || '/tmp/tango-screenshots';
 const selectors = '#tango-board button';
@@ -24,7 +25,7 @@ const selectors = '#tango-board button';
       assert.equal(await page.locator('#tango-new-day').isVisible(), false);
       if (viewport.width < 992) await page.locator('.navbar-toggler').click();
       await page.locator('#miniGamesDropdown').click();
-      const gameLink = page.locator('[aria-labelledby="miniGamesDropdown"] a');
+      const gameLink = page.locator('[aria-labelledby="miniGamesDropdown"] a[href="/mini-games/tango/"]');
       assert(await gameLink.isVisible());
       assert.equal(await gameLink.getAttribute('href'), '/mini-games/tango/');
       await page.locator('#miniGamesDropdown').click();
@@ -91,9 +92,9 @@ const selectors = '#tango-board button';
     });
     const page = await context.newPage();
     await page.clock.install({ time: new Date('2026-11-10T02:00:00Z') });
-    await page.route('**/assets/data/tango.json', route => route.abort());
+    await page.route('**/assets/data/tango.json*', route => route.abort());
     await page.goto(url); await page.waitForSelector('#tango-load-error:not([hidden])');
-    await page.unroute('**/assets/data/tango.json'); await page.locator('#tango-retry').click();
+    await page.unroute('**/assets/data/tango.json*'); await page.locator('#tango-retry').click();
     await page.waitForSelector(selectors);
     assert(await page.locator('#tango-storage-warning').isVisible());
     const playable = page.locator('#tango-board button:not(:disabled)').first();
@@ -104,9 +105,36 @@ const selectors = '#tango-board button';
     assert.equal(await playable.getAttribute('aria-label'), memoryState);
     await page.clock.setSystemTime(new Date('2027-12-06T02:00:00Z'));
     await page.goto(url); await page.waitForSelector(selectors);
-    assert.equal(await page.locator('#tango-date').inputValue(), '2027-12-05');
-    assert.match(await page.locator('#tango-date-notice').textContent(), /아직 준비되지/);
+    assert.equal(await page.locator('#tango-date').inputValue(), '2027-12-06');
+    assert.equal(await page.locator('#tango-date-notice').isVisible(), false);
+    assert.equal(await page.locator(selectors).count(), 36);
     await context.close();
-    console.log('PASS error/retry, blocked storage, end-of-bank fallback');
+    console.log('PASS error/retry, blocked storage, date generation beyond former bank end');
+    const generatedContext = await browser.newContext();
+    const generatedPage = await generatedContext.newPage();
+    await generatedPage.clock.install({ time: new Date('2026-11-11T02:00:00Z') });
+    // An old cached 400-entry bank must not override the new generator cutover.
+    await generatedPage.route('**/assets/data/tango.json*', route => route.fulfill({
+      contentType: 'application/json',
+      body: JSON.stringify({ ...bank, puzzles: Array.from({ length: 400 }, (_, i) => bank.puzzles[i % 10]) })
+    }));
+    await generatedPage.goto(url); await generatedPage.waitForSelector(selectors);
+    const generated = engine.generate('2026-11-11');
+    const fixed = await generatedPage.locator(selectors).evaluateAll(buttons => buttons.map(b => b.disabled));
+    assert.deepEqual(fixed, generated.givens.map(Boolean));
+    const editable = generatedPage.locator('#tango-board button:not(:disabled)').first();
+    await editable.click(); const label = await editable.getAttribute('aria-label');
+    await generatedPage.reload(); await generatedPage.waitForSelector(selectors);
+    assert.equal(await editable.getAttribute('aria-label'), label);
+    for (let i = 0; i < 36; i++) if (!generated.givens[i]) {
+      const target = generatedPage.locator(selectors).nth(i);
+      const name = await target.getAttribute('aria-label');
+      let value = name.includes(', 해') ? 1 : name.includes(', 달') ? 2 : 0;
+      while (value !== generated.solution[i]) { await target.click(); value = (value + 1) % 3; }
+    }
+    assert.match(await generatedPage.locator('#tango-status').textContent(), /완성/);
+    assert(await generatedPage.evaluate(() => Boolean(localStorage.getItem('gongsoonyee:tango:daily-v1:2026-11-11'))));
+    await generatedContext.close();
+    console.log('PASS generated Tango completion, persistence, separate save key, stale-bank cutover');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

@@ -11,7 +11,7 @@
   const sessionProgress = new Map();
   const names = ['빈칸', '해', '달'];
   function warnStorage() { el('storage-warning').hidden = false; }
-  function storageKey() { return 'gongsoonyee:tango:v1:' + selected; }
+  function storageKey() { return 'gongsoonyee:tango:' + (selected <= end ? 'v1' : E.GENERATOR_VERSION) + ':' + selected; }
   function persist() {
     const saved = { version: 1, board: board.slice(), hints };
     sessionProgress.set(selected, saved);
@@ -41,13 +41,13 @@
       if (saved && isBoard(saved.board)) { board = saved.board.slice(); hints = saved.hints; }
     }
   }
-  function maximumDate() { return today < end ? today : end; }
+  function maximumDate() { return today; }
   function available(date) { return E.validDate(date) && date >= bank.start && date <= maximumDate(); }
   function refreshDateRange() {
     el('date').min = bank.start; el('date').max = maximumDate();
-    el('today').hidden = selected === today || today < bank.start || today > end;
+    el('today').hidden = selected === today || today < bank.start;
     el('day-label').textContent = selected === today ? '오늘의 퍼즐' : '지난 퍼즐';
-    el('new-day').hidden = !dayChanged || selected === today || today < bank.start || today > end;
+    el('new-day').hidden = !dayChanged || selected === today || today < bank.start;
   }
   function showDateNotice(message) {
     el('date-notice').textContent = message;
@@ -115,7 +115,7 @@
     if (!available(date)) return;
     selected = date;
     const index = Math.round((Date.parse(date + 'T00:00:00Z') - Date.parse(bank.start + 'T00:00:00Z')) / 86400000);
-    puzzle = bank.puzzles[index];
+    puzzle = selected <= end ? bank.puzzles[index] : E.generate(selected);
     showDateNotice(notice || '');
     restore();
     el('date').value = selected;
@@ -137,7 +137,6 @@
     const fallback = maximumDate();
     let notice = '';
     if (requested && !available(requested)) notice = '선택한 날짜의 퍼즐은 아직 열리지 않았거나 제공 범위를 벗어났어요.';
-    if (today > end && !requested) notice = '오늘의 새 퍼즐은 아직 준비되지 않았어요. 마지막으로 준비된 지난 퍼즐을 열었어요.';
     openDate(requested && available(requested) ? requested : fallback, false, notice);
   }
   function validateBank(data) {
@@ -155,12 +154,13 @@
       const response = await fetch(root.dataset.bankUrl);
       if (!response.ok) throw new Error('Bank unavailable');
       bank = validateBank(await response.json());
-      end = E.addDays(bank.start, bank.puzzles.length - 1); today = E.dayKey();
+      // Published dates are immutable, even if an older cached bank contains future entries.
+      end = E.addDays(bank.start, Math.min(bank.puzzles.length, 10) - 1); today = E.dayKey();
       if (today < bank.start) {
         el('loading').textContent = '첫 퍼즐은 ' + bank.start + ' 한국 시간 자정에 열려요.';
         return;
       }
-      el('coverage').textContent = '준비된 퍼즐: ' + bank.start + ' ~ ' + end;
+      el('coverage').textContent = '날짜에 따라 생성되는 퍼즐 · 지난 퍼즐은 ' + bank.start + '부터';
       fromURL(); el('play').hidden = false; el('loading').hidden = true;
     } catch (_) { el('loading').hidden = true; el('load-error').hidden = false; }
     finally { busy = false; }
@@ -196,7 +196,6 @@
     const next = E.dayKey();
     if (next !== today) {
       today = next; dayChanged = true; refreshDateRange();
-      if (today > end) showDateNotice('오늘의 새 퍼즐은 아직 준비되지 않았어요. 지난 퍼즐은 계속 풀 수 있어요.');
     }
   }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) checkDay(); });
