@@ -24,7 +24,7 @@ Thank you!
 
 ### Reading topics and series
 
-The homepage lists articles by topic. `/series/` redirects to the homepage. Edit `_data/reading.yml` to change groups or
+The homepage preserves Featured and the original article cards. Topic buttons use each topic’s latest article cover and filter the same cards in place. `/series/` redirects to the homepage. Edit `_data/reading.yml` to change groups or
 reading order. Post IDs are the site's existing slug IDs (for example
 `/andrej-karpathy-skills`). A group with `sequential: true` adds a series list,
 current-article marker and previous/next links below each member article.

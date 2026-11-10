@@ -1,7 +1,41 @@
 ---
 layout: default
 title: Home
-series_page: true
 ---
-
-{% include reading_index.html %}
+<section class="featured-posts" id="home-featured">
+  <div class="section-title"><h2><span>Featured</span></h2></div>
+  <div class="row">{% for post in site.posts %}{% if post.featured %}{% include featuredbox.html %}{% endif %}{% endfor %}</div>
+</section>
+<section class="home-categories" aria-label="주제별 글 선택">
+  <div class="section-title"><h2><span>Categories</span></h2></div>
+  <button type="button" class="category-all" data-topic="all" aria-pressed="true">전체 글</button>
+  <div class="category-options">
+  {% for topic in site.data.reading %}
+    {% assign topic_number = forloop.index %}
+    {% assign latest = nil %}
+    {% for candidate in site.posts %}
+      {% assign belongs = false %}
+      {% for group in topic.groups %}{% if group.posts contains candidate.id %}{% assign belongs = true %}{% endif %}{% endfor %}
+      {% if belongs and latest == nil %}{% assign latest = candidate %}{% endif %}
+    {% endfor %}
+    <button type="button" class="category-option" data-topic="{{ topic_number }}" aria-pressed="false">
+      {% if latest.image %}<img src="{% if latest.image contains '://' %}{{ latest.image }}{% else %}{{ latest.image | relative_url }}{% endif %}" alt="{{ latest.title | escape }}" loading="lazy">{% else %}<span class="category-cover">{{ latest.cover | default: latest.title }}</span>{% endif %}
+      <span class="category-name">{{ topic.title }}</span>
+      <span class="category-latest">{{ latest.title }}</span>
+    </button>
+  {% endfor %}
+  </div>
+</section>
+<section class="recent-posts" id="home-stories">
+  <div class="section-title"><h2><span id="home-list-title">All Stories</span></h2></div>
+  <p id="home-count" role="status" aria-live="polite"></p>
+  <div class="row listrecent">
+  {% for post in site.posts %}
+    {% unless post.featured %}
+      {% capture topic_ids %}{% for topic in site.data.reading %}{% assign topic_number = forloop.index %}{% for group in topic.groups %}{% if group.posts contains post.id %}{{ topic_number }} {% endif %}{% endfor %}{% endfor %}{% endcapture %}
+      {% include postbox.html home_topics=topic_ids %}
+    {% endunless %}
+  {% endfor %}
+  </div>
+</section>
+<script src="{{ '/assets/js/home-categories.js' | relative_url }}"></script>
