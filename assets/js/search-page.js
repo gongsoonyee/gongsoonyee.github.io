@@ -8,14 +8,14 @@
     var KEY = 'gongsoonyee-recent-searches';
 
     function load() {
-        try { return JSON.parse(localStorage.getItem(KEY)) || []; }
+        try { var list = JSON.parse(localStorage.getItem(KEY)); return Array.isArray(list) ? list.filter(function (term) { return typeof term === 'string'; }).slice(0, 6) : []; }
         catch (e) { return []; }
     }
 
     function remember(term) {
         var list = load().filter(function (t) { return t !== term; });
         list.unshift(term);
-        localStorage.setItem(KEY, JSON.stringify(list.slice(0, 6)));
+        try { localStorage.setItem(KEY, JSON.stringify(list.slice(0, 6))); } catch (e) {}
         renderRecent();
     }
 
@@ -27,16 +27,34 @@
             var button = document.createElement('button');
             button.type = 'button';
             button.className = 'search-chip';
-            button.appendChild(clock.cloneNode(true));
+            var icon = clock.cloneNode(true); icon.removeAttribute('id'); icon.removeAttribute('hidden'); icon.setAttribute('aria-hidden', 'true'); button.appendChild(icon);
             button.appendChild(document.createTextNode(term));
             button.addEventListener('click', function () { run(term, true); });
             recentChips.appendChild(button);
         });
     }
 
-    function run(term, store) {
+    function highlight(node, text, term) {
+        var words = term.split(/\s+/).filter(Boolean).map(function (word) { return word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); });
+        if (!words.length) { node.textContent = text; return; }
+        var pattern = new RegExp(words.sort(function (a, b) { return b.length - a.length; }).join('|'), 'gi');
+        var start = 0, match;
+        while ((match = pattern.exec(text))) {
+            node.appendChild(document.createTextNode(text.slice(start, match.index)));
+            var mark = document.createElement('mark'); mark.textContent = match[0]; node.appendChild(mark);
+            start = match.index + match[0].length;
+        }
+        node.appendChild(document.createTextNode(text.slice(start)));
+    }
+
+    function run(term, store, syncURL) {
         term = term.trim();
         input.value = term;
+        if (syncURL !== false) {
+            var url = new URL(window.location.href);
+            if (term) url.searchParams.set('q', term); else url.searchParams.delete('q');
+            window.history.replaceState(null, '', url);
+        }
         if (!term) {
             results.hidden = true;
             results.innerHTML = '';
@@ -51,7 +69,7 @@
 
         var count = document.createElement('p');
         count.className = 'search-count';
-        count.textContent = hits.length ? hits.length + '개의 글' : '일치하는 글이 없습니다';
+        count.textContent = '“' + term + '” · ' + (hits.length ? hits.length + '개의 글' : '일치하는 글이 없습니다');
         results.appendChild(count);
 
         hits.forEach(function (hit) {
@@ -61,15 +79,18 @@
             link.href = doc.url;
             var title = document.createElement('span');
             title.className = 'search-hit-title';
-            title.textContent = doc.title;
+            highlight(title, doc.title, term);
             var meta = document.createElement('span');
             meta.className = 'search-hit-meta';
-            meta.textContent = doc.date;
+            meta.textContent = doc.date + ((doc.tags || []).length ? ' · ' + doc.tags.join(' · ') : '');
             var body = document.createElement('span');
             body.className = 'search-hit-body';
             var text = String(doc.body || '').replace(/\s+/g, ' ').trim();
             text = text.replace(/^\d{4}년 \d{1,2}월 \d{1,2}일 · @\S+\s*/, '');
-            body.textContent = text.length > 140 ? text.slice(0, 140) + '…' : text;
+            var positions = term.toLowerCase().split(/\s+/).filter(Boolean).map(function (word) { return text.toLowerCase().indexOf(word); }).filter(function (position) { return position >= 0; });
+            var start = positions.length ? Math.max(0, Math.min.apply(null, positions) - 45) : 0;
+            var snippet = (start ? '…' : '') + text.slice(start, start + 180) + (text.length > start + 180 ? '…' : '');
+            highlight(body, snippet, term);
             link.appendChild(title);
             link.appendChild(meta);
             link.appendChild(body);
@@ -82,12 +103,14 @@
         run(input.value, true);
     });
 
+    var debounce;
     input.addEventListener('input', function () {
-        if (!input.value.trim()) run('', false);
+        clearTimeout(debounce);
+        debounce = setTimeout(function () { run(input.value, false); }, 150);
     });
 
     document.getElementById('recent-clear').addEventListener('click', function () {
-        localStorage.removeItem(KEY);
+        try { localStorage.removeItem(KEY); } catch (e) {}
         renderRecent();
     });
 
@@ -98,5 +121,7 @@
     });
 
     renderRecent();
+    run(new URL(window.location.href).searchParams.get('q') || '', false, false);
+    window.addEventListener('popstate', function () { run(new URL(window.location.href).searchParams.get('q') || '', false, false); });
     input.focus();
 })();
