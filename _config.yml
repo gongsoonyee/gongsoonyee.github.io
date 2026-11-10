@@ -5,6 +5,7 @@ description: ""
 logo: 'assets/images/logo.png'
 favicon: 'assets/images/logo.png'
 baseurl: ""
+url: "https://seungah.is-a.dev"
 google_analytics: 'UA-46278016-1'
 disqus: 'demowebsite'
 include: ["_pages"]
