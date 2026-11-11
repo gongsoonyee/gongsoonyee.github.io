@@ -8,11 +8,23 @@ title: Home
   <div class="row featured-notion-links">
     {% for link in site.data.featured_links %}
     <div class="col-md-6 mb-30px">
-      <a class="featured-notion-card" href="{{ link.url | escape }}" target="_blank" rel="noopener noreferrer" aria-label="{{ link.title | escape }} — Notion, 새 탭에서 열기">
-        <span class="featured-notion-title" lang="{{ link.language }}">{{ link.title }}</span>
-        <span class="featured-notion-caption">Made with Notion <span aria-hidden="true">↗</span></span>
-        <time datetime="{{ link.date | date: '%Y-%m-%d' }}">{{ link.date | date: '%b %Y' }}</time>
-      </a>
+      <div class="listfeaturedtag h-100 featured-notion-card">
+        <div class="row h-100">
+          <div class="col-12 col-md-12 col-lg-5 pr-lg-0">
+            <div class="h-100"><div class="wrapthumbnail">
+              <a class="featured-notion-cover" href="{{ link.url | escape }}" target="_blank" rel="noopener noreferrer" aria-label="{{ link.title | escape }} — 새 탭에서 열기">
+                <img class="featured-box-img-cover" src="{{ '/assets/images/notion-black-cover.svg' | relative_url }}" alt="">
+              </a>
+            </div></div>
+          </div>
+          <div class="col-12 col-md-12 col-lg-7">
+            <div class="h-100 card-group"><div class="card">
+              <div class="card-body"><h2 class="card-title"><a class="text-dark" lang="{{ link.language }}" href="{{ link.url | escape }}" target="_blank" rel="noopener noreferrer" aria-label="{{ link.title | escape }} — 새 탭에서 열기">{{ link.title }}</a></h2></div>
+              <div class="card-footer b-0 bg-white mt-auto"><div class="wrapfooter"><time class="post-date" datetime="{{ link.date | date: '%Y-%m-%d' }}">{{ link.date | date: '%b %d %Y' }}</time></div></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
     </div>
     {% endfor %}
   </div>

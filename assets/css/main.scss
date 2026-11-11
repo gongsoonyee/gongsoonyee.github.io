@@ -257,11 +257,6 @@
 .home-pagination button:focus-visible { outline: 3px solid #235b9b; outline-offset: 3px; }
 #home-stories { scroll-margin-top: 80px; }
 
-.featured-notion-card { display: flex; flex-direction: column; justify-content: center; min-height: 180px; height: 100%; padding: 28px; border: 1px solid #e2e2e2; border-radius: 3px; background: #fff; color: #111; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-.featured-notion-card:hover { color: #111; border-color: #888; text-decoration: none; }
-.featured-notion-card:focus-visible { outline: 3px solid #235b9b; outline-offset: 4px; }
-.featured-notion-title { font-size: clamp(24px, 3vw, 36px); line-height: 1.2; letter-spacing: -.04em; font-weight: 800; overflow-wrap: anywhere; }
-.featured-notion-caption { margin-top: 10px; font-size: 16px; color: #717171; font-weight: 600; }
-.featured-notion-caption span { margin-left: 8px; }
-.featured-notion-card time { margin-top: 20px; font-size: 12px; color: #666; }
-@media (max-width: 767px) { .featured-notion-card { min-height: 156px; padding: 24px; } }
+.featured-notion-card a:focus-visible { outline: 3px solid #235b9b; outline-offset: 3px; }
+.featured-notion-cover { display: block; height: 100%; }
+@media (min-width: 992px) { #home-featured .listfeaturedtag { min-height: 180px; } }
