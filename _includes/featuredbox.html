@@ -1,20 +1,23 @@
 <!-- begin post -->
-{% assign author = site.authors[post.author] %}
+{% assign featured_item = include.item | default: post %}
+{% assign author = site.authors[featured_item.author] %}
+{% assign featured_url = featured_item.url | relative_url %}
+{% if featured_item.external %}{% assign featured_url = featured_item.url %}{% endif %}
 <div class="col-md-6 mb-30px">
     <div class="listfeaturedtag h-100">
         <div class="row h-100">
             <div class="col-12 col-md-12 col-lg-5 pr-lg-0">
                 <div class="h-100">
                     <div class="wrapthumbnail">
-                        <a href="{{ site.baseurl }}{{ post.url }}">
-                            {% if post.image %}
+                        <a href="{{ featured_url | escape }}"{% if featured_item.external %} target="_blank" rel="noopener noreferrer" aria-label="{{ featured_item.title | escape }} — 새 탭에서 열기"{% endif %}>
+                            {% if featured_item.image %}
                             {% if site.lazyimages == "enabled" %}
-                            <img class="featured-box-img-cover lazyimg"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="{% if post.image contains "://" %}{{ post.image }}{% else %}{{ site.baseurl }}/{{ post.image }}{% endif %}">
+                            <img class="featured-box-img-cover lazyimg"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="{% if featured_item.image contains "://" %}{{ featured_item.image }}{% else %}{{ site.baseurl }}/{{ featured_item.image }}{% endif %}">
                             {% else %}
-                            <img class="featured-box-img-cover" src="{% if post.image contains "://" %}{{ post.image }}{% else %}{{ site.baseurl }}/{{ post.image }}{% endif %}">
+                            <img class="featured-box-img-cover" src="{% if featured_item.image contains "://" %}{{ featured_item.image }}{% else %}{{ site.baseurl }}/{{ featured_item.image }}{% endif %}">
                             {% endif %}
                             {% else %}
-                            {% include text_cover.html item=post %}
+                            {% include text_cover.html item=featured_item %}
                             {% endif %}
                         </a>
                     </div>
@@ -25,19 +28,19 @@
                     <div class="card">
                         <div class="card-body">
                             <h2 class="card-title">
-                                <a class="text-dark" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-                                {% if post.rating %}
+                                <a class="text-dark" href="{{ featured_url | escape }}"{% if featured_item.external %} target="_blank" rel="noopener noreferrer" aria-label="{{ featured_item.title | escape }} — 새 탭에서 열기"{% endif %}>{{ featured_item.title }}</a>
+                                {% if featured_item.rating %}
                                 <div class="mb-2 mt-2 font-weight-normal">
                                 {% include star_rating_postbox.html %}
                                 </div>
                                 {% endif %}
                             </h2>
 
-                            <h4 class="card-text">{{ post.excerpt | strip_html | truncatewords:25 }}</h4>
+                            <h4 class="card-text">{{ featured_item.description | default: featured_item.excerpt | strip_html | truncatewords:25 }}</h4>
                         </div>
                         <div class="card-footer b-0 bg-white mt-auto">
                             <div class="wrapfooter">
-                                {% if post.author %}
+                                {% if featured_item.author %}
                                 <span class="meta-footer-thumb">
                                 {% if author.avatar %}
                                 <img class="author-thumb" src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
@@ -48,7 +51,7 @@
                                 <span class="author-meta">
                                 <span class="post-name"><a target="_blank" href="{{ author.web }}">{{ author.display_name }}</a></span><br/>
                                 {% endif %}
-                                <span class="post-date">{{ post.date | date_to_string }}</span>
+                                <span class="post-date"><time datetime="{{ featured_item.date | date: '%Y-%m-%d' }}">{{ featured_item.date | date: '%b %d %Y' }}</time></span>
                                 </span>
                                 <div class="clearfix"></div>
                             </div>

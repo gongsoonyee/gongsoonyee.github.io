@@ -257,6 +257,5 @@
 .home-pagination button:focus-visible { outline: 3px solid #235b9b; outline-offset: 3px; }
 #home-stories { scroll-margin-top: 80px; }
 
-.featured-notion-card a:focus-visible { outline: 3px solid #235b9b; outline-offset: 3px; }
-.featured-notion-cover { display: block; height: 100%; }
+#home-featured .listfeaturedtag a:focus-visible { outline: 3px solid #235b9b; outline-offset: 3px; }
 @media (min-width: 992px) { #home-featured .listfeaturedtag { min-height: 180px; } }
