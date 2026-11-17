@@ -24,6 +24,7 @@
     hunks = result.hunks;
     $('diff-total').textContent = hunks.length;
     $('diff-summary').textContent = !left && !right ? '양쪽에 텍스트를 입력하면 자동으로 비교해요.' : !hunks.length ? ($('diff-ignore').checked ? '공백 차이를 제외하면 두 문서가 같아요.' : '두 문서가 같아요.') : `${hunks.length}개의 변경 구간이 있어요. 반영할 방향을 선택하세요.`;
+    $('diff-smart-note').hidden = $('diff-unit').value !== 'smart';
     $('diff-limit').hidden = !result.coarse;
     $('diff-undo').disabled = !history.length;
     $('diff-jump').disabled = !hunks.length;

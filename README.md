@@ -82,7 +82,9 @@ PLAYWRIGHT_MODULE=/path/to/playwright node tests/2048-browser.cjs
 
 **WorkTools → Diff Checker** opens `/work-tools/diffchecker/`. Paste plain text
 into the two editors to compare words, sentences, graphemes, or lines, optionally
-ignoring whitespace. Counts show graphemes with/without whitespace, whitespace-
+ignoring whitespace. Smart mode aligns Markdown and chapter/section headings,
+compares each changed chapter as a whole, and falls back to blank-line-separated
+paragraphs when headings are absent. Counts show graphemes with/without whitespace, whitespace-
 separated words, and lines. Merge individual differences or the entire document
 in either direction; undo retains the latest 50 edits/actions in memory. Copy or
 download either document as UTF-8 text. Text is processed locally without upload

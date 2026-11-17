@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const { compare, merge, count } = require('../assets/js/diff-engine');
 test('empty, equal, insertion and deletion preserve exact text', () => {
   for (const [a,b] of [['',''],['same','same'],['','새 문서\n'],['abc',''],['a\nb','a\nc'],['안녕 👩‍💻!','안녕 🌍!']]) {
-    for (const unit of ['word','sentence','character','line']) {
+    for (const unit of ['word','sentence','character','line','smart']) {
       let left = a, right = b;
       for (const h of compare(left,right,unit).hunks.reverse()) left = merge(left,right,h,'left');
       assert.equal(left,b);
@@ -32,10 +32,30 @@ test('randomized complete merge reconstructs either document', () => {
   for(let run=0;run<200;run++) {
     const make=()=>Array.from({length:Math.floor(rand()*40)},()=>alphabet[Math.floor(rand()*alphabet.length)]).join('');
     const a=make(), b=make();
-    for(const unit of ['word','sentence','character','line']) {
+    for(const unit of ['word','sentence','character','line','smart']) {
       let left=a, right=b;
       for(const h of compare(a,b,unit).hunks.reverse()) {left=merge(left,b,h,'left');right=merge(a,right,h,'right');}
       assert.equal(left,b); assert.equal(right,a);
     }
   }
+});
+
+test('smart aligns changed chapters and merges them independently', () => {
+  for (const titles of [['# 시작', '# 마무리'], ['제1장 시작', '제2장 마무리'], ['Chapter 1 Intro', 'Chapter 2 End']]) {
+    const a = `${titles[0]}\nold\n\n${titles[1]}\nbefore\n`;
+    const b = `${titles[0]}\nnew\n\n${titles[1]}\nafter\n`;
+    const result = compare(a,b,'smart');
+    assert.equal(result.hunks.length,2);
+    assert.equal(result.hunks[0].left, `${titles[0]}\nold\n\n`);
+    assert.equal(merge(a,b,result.hunks[0],'left'), `${titles[0]}\nnew\n\n${titles[1]}\nbefore\n`);
+    let merged=a; for(const h of result.hunks.slice().reverse()) merged=merge(merged,b,h,'left'); assert.equal(merged,b);
+  }
+});
+test('smart handles paragraph fallback, inserted chapters and fenced headings', () => {
+  assert.equal(compare('same\n\nold\n\nend','same\n\nnew\n\nend','smart').hunks[0].left,'old\n\n');
+  const a='# A\nbody\n\n# C\nend', b='# A\nbody\n\n# B\nadded\n\n# C\nend';
+  const h=compare(a,b,'smart').hunks[0]; assert.equal(h.left,''); assert.equal(merge(a,b,h,'left'),b);
+  const c='# A\n```md\n# fake\n```\nold\n', d=c.replace('old','new');
+  assert.equal(compare(c,d,'smart').hunks[0].left,c);
+  assert.equal(compare('# A\nhello  world','# A\nhello world','smart',true).hunks.length,0);
 });
