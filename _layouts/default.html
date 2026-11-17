@@ -87,6 +87,13 @@ ga('send', 'pageview');
                 </div>
                 </li>
 
+                <li class="nav-item dropdown{% if page.tool_page %} active{% endif %}">
+                <a class="nav-link dropdown-toggle" href="#" id="workToolsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">WorkTools</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="workToolsDropdown">
+                    <a class="dropdown-item{% if page.tool_id == 'diffchecker' %} active{% endif %}" href="{{ '/work-tools/diffchecker/' | relative_url }}"{% if page.tool_id == 'diffchecker' %} aria-current="page"{% endif %}>Diff Checker</a>
+                </div>
+                </li>
+
                 <li class="nav-item">
                 <a class="nav-link" href="{{ '/feed.xml' | relative_url }}" type="application/rss+xml">RSS</a>
                 </li>
@@ -116,7 +123,7 @@ ga('send', 'pageview');
 
 <!-- Site Title
 ================================================== -->
-{% unless page.search_page or page.game_page or page.series_page %}
+{% unless page.search_page or page.game_page or page.series_page or page.tool_page %}
 <div class="mainheading">
     <h1 class="sitetitle">{{ site.name }}</h1>
     <p class="lead">
@@ -135,7 +142,7 @@ ga('send', 'pageview');
 
 <!-- Categories Jumbotron
 ================================================== -->
-{% unless page.search_page or page.game_page or page.series_page %}
+{% unless page.search_page or page.game_page or page.series_page or page.tool_page %}
 <div class="jumbotron fortags">
 	<div class="d-md-flex h-100">
 		<div class="col-md-4 transpdark align-self-center text-center h-100">

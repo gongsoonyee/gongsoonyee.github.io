@@ -1,0 +1,28 @@
+---
+layout: default
+title: Diff Checker · WorkTools
+permalink: /work-tools/diffchecker/
+tool_page: true
+tool_id: diffchecker
+---
+<link rel="stylesheet" href="{{ '/assets/css/diffchecker.css' | relative_url }}">
+<main id="diffchecker" class="diff-tool" lang="ko">
+  <header class="diff-heading"><p class="diff-eyebrow">WORKTOOLS / TEXT</p><h1>Diff Checker<span>.</span></h1><p>두 글의 차이를 찾고, 남길 내용을 골라 보세요.</p></header>
+  <noscript>텍스트를 비교하려면 JavaScript를 켜 주세요.</noscript>
+  <div class="diff-toolbar">
+    <label>비교 단위 <select id="diff-unit"><option value="word">단어</option><option value="sentence">문장</option><option value="character">글자</option><option value="line">줄</option></select></label>
+    <label class="diff-check"><input type="checkbox" id="diff-ignore"> 공백 차이 무시</label>
+    <button type="button" id="diff-jump">변경 구간 보기 ↓</button>
+    <button type="button" id="diff-undo" disabled>되돌리기</button>
+  </div>
+  <div class="diff-editors">
+    <section class="diff-document"><div class="diff-document-title"><label for="diff-left">왼쪽 문서</label><div><button type="button" data-copy="left">복사</button><button type="button" data-download="left">TXT 저장</button></div></div><textarea id="diff-left" spellcheck="false" placeholder="첫 번째 텍스트를 붙여넣으세요." aria-describedby="count-left"></textarea><p id="count-left" class="diff-count"></p></section>
+    <section class="diff-document"><div class="diff-document-title"><label for="diff-right">오른쪽 문서</label><div><button type="button" data-copy="right">복사</button><button type="button" data-download="right">TXT 저장</button></div></div><textarea id="diff-right" spellcheck="false" placeholder="비교할 텍스트를 붙여넣으세요." aria-describedby="count-right"></textarea><p id="count-right" class="diff-count"></p></section>
+  </div>
+  <div class="diff-full-merge"><span>문서 전체 반영</span><button type="button" data-full="left">← 오른쪽을 왼쪽에</button><button type="button" data-full="right">왼쪽을 오른쪽에 →</button></div>
+  <section class="diff-results" aria-labelledby="diff-result-heading"><div class="diff-result-bar"><h2 id="diff-result-heading">변경 구간 <span id="diff-total">0</span></h2><div><span id="diff-position"></span><button type="button" id="diff-prev" aria-label="이전 변경 구간">↑ 이전</button><button type="button" id="diff-next" aria-label="다음 변경 구간">다음 ↓</button></div></div><p id="diff-summary" role="status" aria-live="polite"></p><p id="diff-limit" hidden>변경량이 많아 일부 차이를 큰 구간으로 묶었어요. 문장 또는 줄 단위를 선택하면 더 빠르게 비교할 수 있어요.</p><div id="diff-hunks"></div></section>
+  <p id="diff-message" role="status" aria-live="polite"></p>
+  <p class="diff-note">텍스트는 이 브라우저에서만 처리하며 자동 저장하지 않아요. 글자 수는 이모지·결합 문자를 한 글자로, 단어 수는 공백으로 나눈 어절로 셉니다.</p>
+</main>
+<script src="{{ '/assets/js/diff-engine.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/diffchecker.js' | relative_url }}" defer></script>

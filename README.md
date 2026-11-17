@@ -77,3 +77,20 @@ tiles. A successful move spawns one new tile; a move that changes nothing does n
 ```sh
 PLAYWRIGHT_MODULE=/path/to/playwright node tests/2048-browser.cjs
 ```
+
+### WorkTools
+
+**WorkTools → Diff Checker** opens `/work-tools/diffchecker/`. Paste plain text
+into the two editors to compare words, sentences, graphemes, or lines, optionally
+ignoring whitespace. Counts show graphemes with/without whitespace, whitespace-
+separated words, and lines. Merge individual differences or the entire document
+in either direction; undo retains the latest 50 edits/actions in memory. Copy or
+download either document as UTF-8 text. Text is processed locally without upload
+or persistent storage. Large comparisons use a coarser replacement region to
+bound diff computation. Modern browsers use `Intl.Segmenter` for Korean-aware
+segmentation; older browsers fall back to simpler splitting.
+
+```sh
+node --test tests/diff-engine.test.cjs
+DIFF_TEST_URL=http://127.0.0.1:4000/work-tools/diffchecker/ PLAYWRIGHT_MODULE=/path/to/playwright node tests/diffchecker-browser.cjs
+```
