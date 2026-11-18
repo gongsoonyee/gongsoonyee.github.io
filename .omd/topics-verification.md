@@ -10,7 +10,7 @@ no full Ultradesign certification or external reference measurements are claimed
 
 - Inspected actual index, reading data/includes, post layout, default layout,
   existing reading styles, post filenames and front matter, and Intro content.
-- Python/YAML validation: 16 posts each assigned exactly once, no stale slugs,
+- Python/YAML validation: 17 posts each assigned exactly once, no stale slugs,
   unique theme and group anchors.
 - Actual Liquid templates rendered using a temporary LiquidJS installation,
   with Jekyll-style includes and URL/where filters, actual data/front matter and
@@ -34,3 +34,7 @@ no full Ultradesign certification or external reference measurements are claimed
 - JavaScript syntax and git diff whitespace checks passed.
 
 Existing uncommitted coding-agent article edits are excluded from deployment.
+
+Before push, remote c7f0f2e added BOJ is Back. Read its actual content,
+merged the remote commit and classified the new post in study-essays. Existing
+article working edits remained untouched. Coverage rechecked for all 17 posts.
