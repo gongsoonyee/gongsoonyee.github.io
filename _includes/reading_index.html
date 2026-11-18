@@ -1,24 +1,36 @@
-<main class="reading-index" id="topics" lang="ko">
-  <p class="reading-label">READ BY TOPIC</p>
-  <h1>주제별 글 모음</h1>
-  <p class="reading-intro">궁금한 주제부터, 연결해서 읽어 보세요. <a href="{{ '/intro/' | relative_url }}">소개 →</a></p>
-  <nav class="reading-jump" aria-label="주제 바로가기">
-    {% for topic in site.data.reading %}<a href="#topic-{{ forloop.index }}">{{ topic.title }}</a>{% endfor %}
-  </nav>
-  {% for topic in site.data.reading %}
-  <section class="reading-topic" id="topic-{{ forloop.index }}">
-    <h2><span>{{ forloop.index }}.</span> {{ topic.title }}</h2>
-    {% for group in topic.groups %}
-    <section class="reading-group" id="{{ group.id }}">
-      <h3>{{ group.title }}{% if group.sequential %}<span class="reading-badge">시리즈 · 추천 순서</span>{% endif %}</h3>
-      <ol>
-        {% for post_id in group.posts %}
-        {% assign entry = site.posts | where: 'id', post_id | first %}
-        {% if entry %}<li><a href="{{ entry.url | relative_url }}">{{ entry.title }}</a><time datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: '%Y.%m.%d' }}</time></li>{% endif %}
-        {% endfor %}
-      </ol>
-    </section>
-    {% endfor %}
-  </section>
-  {% endfor %}
+{% capture classified %}|{% for topic in site.data.reading %}{% for group in topic.groups %}{% for post_id in group.posts %}{{ post_id | remove_first: '/' }}|{% endfor %}{% endfor %}{% endfor %}{% endcapture %}
+{% assign unclassified_count = 0 %}{% for entry in site.posts %}{% assign lookup = entry.slug | prepend: '|' | append: '|' %}{% unless classified contains lookup %}{% assign unclassified_count = unclassified_count | plus: 1 %}{% endunless %}{% endfor %}
+<main class="topics-page" id="topics" lang="ko">
+  <header class="topics-heading"><p class="topics-eyebrow">READ BY TOPIC</p><h1>주제별 글 모음<span>.</span></h1><p>궁금한 주제부터, 연결해서 읽어 보세요.</p><span class="topics-total">{{ site.posts.size }}편의 기록 · {{ site.data.reading.size }}개의 주제</span></header>
+  <div class="topics-workspace">
+    <nav class="topics-nav" aria-label="주제 바로가기"><p>목차</p>
+      {% for topic in site.data.reading %}<a href="#{{ topic.id }}">{{ topic.title }}</a>{% endfor %}
+      {% if unclassified_count > 0 %}<a href="#unclassified">아직 분류하지 않은 글</a>{% endif %}
+    </nav>
+    <div class="topics-content">
+      {% for topic in site.data.reading %}
+      {% assign topic_count = 0 %}{% for group in topic.groups %}{% for post_id in group.posts %}{% assign slug = post_id | remove_first: '/' %}{% assign entry = site.posts | where: 'slug', slug | first %}{% if entry %}{% assign topic_count = topic_count | plus: 1 %}{% endif %}{% endfor %}{% endfor %}
+      <details class="topics-topic" id="{{ topic.id }}" open>
+        <summary><span class="topics-topic-number">0{{ forloop.index }}</span><span><h2>{{ topic.title }}</h2><span class="topics-description">{{ topic.description }}</span></span><span class="topics-count">{{ topic_count }}편</span><span class="topics-chevron" aria-hidden="true"></span></summary>
+        <div class="topics-groups">
+          {% for group in topic.groups %}
+          <section class="topics-group" id="{{ group.id }}" aria-labelledby="heading-{{ group.id }}">
+            <h3 id="heading-{{ group.id }}">{{ group.title }}{% if group.sequential %}<small>추천 읽기 순서</small>{% endif %}</h3>
+            <ol class="topics-post-list{% if group.sequential %} is-sequential{% endif %}">
+              {% for post_id in group.posts %}{% assign slug = post_id | remove_first: '/' %}{% assign entry = site.posts | where: 'slug', slug | first %}
+              {% if entry %}<li><a href="{{ entry.url | relative_url }}"><span class="topics-post-title">{{ entry.title | escape }}</span><time datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: '%Y.%m.%d' }}</time><span class="topics-post-arrow" aria-hidden="true">↗</span></a></li>{% endif %}
+              {% endfor %}
+            </ol>
+          </section>
+          {% endfor %}
+        </div>
+      </details>
+      {% endfor %}
+      {% if unclassified_count > 0 %}
+      <details class="topics-topic" id="unclassified" open><summary><span><h2>아직 분류하지 않은 글</h2><span class="topics-description">새로 쓴 기록도 여기서 찾을 수 있어요.</span></span><span class="topics-count">{{ unclassified_count }}편</span><span class="topics-chevron" aria-hidden="true"></span></summary><div class="topics-groups"><ol class="topics-post-list">
+      {% for entry in site.posts %}{% assign lookup = entry.slug | prepend: '|' | append: '|' %}{% unless classified contains lookup %}<li><a href="{{ entry.url | relative_url }}"><span class="topics-post-title">{{ entry.title | escape }}</span><time datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: '%Y.%m.%d' }}</time><span aria-hidden="true">↗</span></a></li>{% endunless %}{% endfor %}
+      </ol></div></details>
+      {% endif %}
+    </div>
+  </div>
 </main>

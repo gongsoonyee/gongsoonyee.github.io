@@ -9,6 +9,7 @@ title: Home
     {% for link in site.data.featured_links %}{% include featuredbox.html item=link %}{% endfor %}
   </div>
 </section>
+{% include home_topics.html %}
 <section class="home-categories" aria-label="인기 태그별 글 선택">
   <div class="section-title"><h2><span>Popular Tags</span></h2></div>
   <button type="button" class="category-all" data-topic="all" aria-pressed="true">전체 글</button>

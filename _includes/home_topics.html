@@ -1,0 +1,9 @@
+<section class="home-topics" aria-labelledby="home-topics-title">
+  <div class="topics-section-heading"><h2 id="home-topics-title">주제별로 읽기</h2><a href="{{ '/topics/' | relative_url }}">전체 목차 <span aria-hidden="true">↗</span></a></div>
+  <div class="home-topics-links">
+    {% for topic in site.data.reading %}
+    {% assign topic_count = 0 %}{% for group in topic.groups %}{% for post_id in group.posts %}{% assign slug = post_id | remove_first: '/' %}{% assign entry = site.posts | where: 'slug', slug | first %}{% if entry %}{% assign topic_count = topic_count | plus: 1 %}{% endif %}{% endfor %}{% endfor %}
+    <a href="{{ '/topics/' | relative_url }}#{{ topic.id }}"><span>{{ topic.title }}</span><small>{{ topic_count }}편 <span aria-hidden="true">↗</span></small></a>
+    {% endfor %}
+  </div>
+</section>

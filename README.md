@@ -24,11 +24,25 @@ Thank you!
 
 ### Reading topics and series
 
-The homepage preserves Featured and the original article cards. The six most-used tags are selected automatically (ties use latest publication date); buttons show the latest tagged article cover and filter the same cards in place. `/series/` redirects to the homepage. Edit `_data/reading.yml` to change groups or
-reading order. Post IDs are the site's existing slug IDs (for example
-`/andrej-karpathy-skills`). A group with `sequential: true` adds a series list,
-current-article marker and previous/next links below each member article.
-Grouping does not change article content, publication dates or URLs.
+The homepage keeps Featured and the original article cards, with a compact
+**주제별로 읽기** section linking to **Topics** at `/topics/`. Topics groups the
+whole blog by theme and subgroup, using a sticky theme index on desktop and native
+accordion sections on mobile. The six most-used tags remain independent filters
+on the homepage (ties use latest publication date).
+
+Edit `_data/reading.yml` to change themes, groups and reading order. Each post
+belongs to one primary group; `posts` contains slash-prefixed slugs, for example
+`/andrej-karpathy-skills`. Entries resolve by `post.slug`, independently of their
+date or permalink. Unlisted new posts automatically appear under **아직 분류하지
+않은 글**, so adding a post never hides it from Topics. Each theme/group must have
+a unique stable `id` for deep links. `/series/` redirects to Topics and preserves
+its fragment. A group with `sequential: true` displays recommended reading order
+and previous/next links below each member post; other groups show same-topic links.
+Post contents, dates and existing URLs are preserved.
+
+```sh
+TOPICS_TEST_URL=http://127.0.0.1:4000/topics/ PLAYWRIGHT_MODULE=/path/to/playwright node tests/topics-browser.cjs
+```
 
 ### Daily mini games
 

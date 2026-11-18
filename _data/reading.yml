@@ -1,4 +1,6 @@
-- title: AI와 개발
+- id: ai-development
+  title: AI와 개발
+  description: 에이전트와 함께 개발하고, 화면을 만드는 방법
   groups:
     - id: coding-agents
       title: AI 코딩 에이전트 활용기
@@ -12,7 +14,9 @@
       posts:
         - /shadcn-ui-vs-daangn-seed
         - /visualization-animation-libraries
-- title: 연구와 대학원
+- id: research
+  title: 연구와 대학원
+  description: 연구에 쓰는 도구와 학회에서 얻은 생각
   groups:
     - id: research-tools
       title: 연구 도구
@@ -23,7 +27,9 @@
       posts:
         - /icml-2026-review
         - /iclr-2027-submission-cap
-- title: 개발 도구와 블로그
+- id: development-tools
+  title: 개발 도구와 블로그
+  description: 직접 써보고 설정한 개발 도구와 블로그 기록
   groups:
     - id: security
       title: 보안·OSINT
@@ -33,7 +39,9 @@
       title: 블로그 운영
       posts:
         - /github-pages-is-a-dev-domain
-- title: 경험과 회고
+- id: life-and-experience
+  title: 경험과 회고
+  description: 참여하고, 공부하고, 돌아보며 남긴 이야기
   groups:
     - id: experiences
       title: 대회·전시·서비스 후기
@@ -46,3 +54,7 @@
       posts:
         - /adsp-50-pass-review
         - /baekjoon-service-end
+    - id: about
+      title: 소개
+      posts:
+        - /intro

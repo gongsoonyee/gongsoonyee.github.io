@@ -17,6 +17,7 @@
 <link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet">
 
 <link href="{{ site.baseurl }}/assets/css/main.css?v=15" rel="stylesheet">
+<link href="{{ '/assets/css/topics.css' | relative_url }}" rel="stylesheet">
 
 <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
 
@@ -73,6 +74,10 @@ ga('send', 'pageview');
                 <a class="nav-link" href="{{ site.baseurl }}/index.html">Blog</a>
                 </li>
 
+                <li class="nav-item{% if page.topics_page %} active{% endif %}">
+                <a class="nav-link" href="{{ '/topics/' | relative_url }}"{% if page.topics_page %} aria-current="page"{% endif %}>Topics</a>
+                </li>
+
                 <li class="nav-item{% if page.search_page %} active{% endif %}">
                 <a class="nav-link" href="{{ site.baseurl }}/search/">Search</a>
                 </li>
@@ -123,7 +128,7 @@ ga('send', 'pageview');
 
 <!-- Site Title
 ================================================== -->
-{% unless page.search_page or page.game_page or page.series_page or page.tool_page %}
+{% unless page.search_page or page.game_page or page.series_page or page.tool_page or page.topics_page %}
 <div class="mainheading">
     <h1 class="sitetitle">{{ site.name }}</h1>
     <p class="lead">
@@ -142,7 +147,7 @@ ga('send', 'pageview');
 
 <!-- Categories Jumbotron
 ================================================== -->
-{% unless page.search_page or page.game_page or page.series_page or page.tool_page %}
+{% unless page.search_page or page.game_page or page.series_page or page.tool_page or page.topics_page %}
 <div class="jumbotron fortags">
 	<div class="d-md-flex h-100">
 		<div class="col-md-4 transpdark align-self-center text-center h-100">

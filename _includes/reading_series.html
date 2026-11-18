@@ -1,15 +1,17 @@
 {% for topic in site.data.reading %}
 {% for group in topic.groups %}
-{% if group.sequential and group.posts contains page.id %}
+{% assign page_key = page.slug | prepend: '/' %}
+{% if group.posts contains page_key %}
+{% if group.sequential %}
 <nav class="reading-series" aria-label="{{ group.title | escape }} 시리즈">
-  <a class="reading-label" href="{{ '/' | relative_url }}#{{ group.id }}">시리즈</a>
+  <a class="reading-label" href="{{ '/topics/' | relative_url }}#{{ group.id }}">시리즈</a>
   <h2>{{ group.title }}</h2>
   <ol>
     {% assign previous_entry = nil %}{% assign next_entry = nil %}{% assign found_current = false %}
     {% for post_id in group.posts %}
-    {% assign entry = site.posts | where: 'id', post_id | first %}
+    {% assign slug = post_id | remove_first: '/' %}{% assign entry = site.posts | where: 'slug', slug | first %}
     {% if entry %}
-      {% if entry.id == page.id %}
+      {% if entry.slug == page.slug %}
         <li class="is-current"><span aria-current="page">{{ entry.title }} <small>지금 읽는 글</small></span></li>
         {% assign found_current = true %}
       {% else %}
@@ -24,6 +26,16 @@
     {% if next_entry %}<a rel="next" href="{{ next_entry.url | relative_url }}"><small>다음 글 →</small>{{ next_entry.title }}</a>{% endif %}
   </div>
 </nav>
+{% else %}
+<nav class="topic-related" aria-label="{{ group.title | escape }} 관련 글">
+  <p>{{ topic.title }} / 같은 주제의 글</p>
+  <h2>{{ group.title }}</h2>
+  <ul>{% for post_id in group.posts %}{% assign slug = post_id | remove_first: '/' %}{% assign entry = site.posts | where: 'slug', slug | first %}{% if entry %}
+    <li>{% if entry.slug == page.slug %}<span aria-current="page">{{ entry.title | escape }}<small>지금 읽는 글</small></span>{% else %}<a href="{{ entry.url | relative_url }}">{{ entry.title | escape }}</a>{% endif %}</li>
+  {% endif %}{% endfor %}</ul>
+  <a href="{{ '/topics/' | relative_url }}#{{ group.id }}">주제별 목차로 <span aria-hidden="true">↗</span></a>
+</nav>
+{% endif %}
 {% endif %}
 {% endfor %}
 {% endfor %}
