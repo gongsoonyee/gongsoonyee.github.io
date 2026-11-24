@@ -26,7 +26,7 @@ title: Home
     {% assign tagged_posts = site.tags[tag_name] | sort: 'date' | reverse %}
     {% assign latest = tagged_posts | first %}
     <button type="button" class="category-option" data-topic="{{ tag_name | escape }}" aria-pressed="false">
-      {% if latest.image %}<img src="{% if latest.image contains '://' %}{{ latest.image }}{% else %}{{ latest.image | relative_url }}{% endif %}" alt="{{ latest.title | escape }}" loading="lazy">{% else %}<span class="category-cover">{{ latest.cover | default: latest.title }}</span>{% endif %}
+      {% if latest.image %}<img src="{% if latest.image contains '://' %}{{ latest.image }}{% else %}{{ latest.image | relative_url }}{% endif %}" alt="{{ latest.title | escape }}" loading="lazy">{% else %}{% include text_cover.html item=latest class="category-cover" %}{% endif %}
       <span class="category-name">#{{ tag_name }} <small>{{ tagged_posts.size }}개</small></span>
       <span class="category-latest">{{ latest.title }}</span>
     </button>
