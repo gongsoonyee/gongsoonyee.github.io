@@ -3,7 +3,7 @@ layout: post
 title: "Orca 핵심 정리: 여러 AI 에이전트를 한 화면에서 지휘하기"
 categories: [ AI, Development ]
 tags: [ Orca, AI 에이전트, 멀티 에이전트 ]
-image: assets/images/orca-overview.jpg
+image: assets/images/2026-08-24-orca-multi-agent-guide/orca-overview.jpg
 ---
 
 2026년 8월 24일 · @gongsoonyee

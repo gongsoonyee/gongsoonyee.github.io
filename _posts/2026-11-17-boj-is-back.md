@@ -4,7 +4,7 @@ title: "BOJ is Back"
 date: 2026-11-17 12:00:00 +0900
 categories: [ Essay ]
 tags: [ 백준, 복귀 ]
-image: assets/images/boj-is-back.jpeg
+image: assets/images/2026-11-17-boj-is-back/boj-is-back.jpeg
 
 ---
 
@@ -22,4 +22,3 @@ image: assets/images/boj-is-back.jpeg
 지난 4월 서비스 종료 소식을 접하고 아쉬운 마음에 글을 남겼었는데, 다시 돌아온다는 소식을 들으니 반갑다.
 
 **BOJ is Back!**
-

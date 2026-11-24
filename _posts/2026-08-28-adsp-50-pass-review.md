@@ -3,7 +3,7 @@ layout: post
 title: "ADsP 50회 합격 후기"
 categories: [ Study ]
 tags: [ ADsP, 자격증, 합격 후기 ]
-image: assets/images/adsp-result.jpg
+image: assets/images/2026-08-28-adsp-50-pass-review/adsp-result.jpg
 ---
 
 2026년 8월 28일 · @gongsoonyee

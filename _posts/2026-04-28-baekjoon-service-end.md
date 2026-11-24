@@ -3,7 +3,7 @@ layout: post
 title: "백준 서비스 종료"
 categories: [ Essay ]
 tags: [ 백준, 회고 ]
-image: assets/images/baekjoon-repo.jpg
+image: assets/images/2026-04-28-baekjoon-service-end/baekjoon-repo.jpg
 ---
 
 2026년 4월 28일 · @gongsoonyee
