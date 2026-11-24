@@ -96,6 +96,7 @@ ga('send', 'pageview');
                 <a class="nav-link dropdown-toggle" href="#" id="workToolsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">WorkTools</a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="workToolsDropdown">
                     <a class="dropdown-item{% if page.tool_id == 'diffchecker' %} active{% endif %}" href="{{ '/work-tools/diffchecker/' | relative_url }}"{% if page.tool_id == 'diffchecker' %} aria-current="page"{% endif %}>Diff Checker</a>
+                    <a class="dropdown-item{% if page.tool_id == 'ascii-art' %} active{% endif %}" href="{{ '/work-tools/ascii-art/' | relative_url }}"{% if page.tool_id == 'ascii-art' %} aria-current="page"{% endif %}>ASCII Art Maker</a>
                 </div>
                 </li>
 

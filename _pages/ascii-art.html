@@ -1,0 +1,60 @@
+---
+layout: default
+title: ASCII Art Maker · WorkTools
+permalink: /work-tools/ascii-art/
+tool_page: true
+tool_id: ascii-art
+---
+<link rel="stylesheet" href="{{ '/assets/css/ascii-art.css' | relative_url }}">
+<main id="ascii-art" class="ascii-tool" lang="en">
+  <header class="ascii-heading">
+    <p class="ascii-eyebrow">WORKTOOLS / IMAGE</p>
+    <h1>ASCII Art Maker<span>.</span></h1>
+    <p>Turn an image into copyable text art, with an optional full-color HTML version.</p>
+  </header>
+  <noscript>Enable JavaScript to create ASCII art.</noscript>
+  <div class="ascii-workspace">
+    <section class="ascii-settings" aria-label="Image and settings">
+      <label class="ascii-upload" id="ascii-drop">
+        <input id="ascii-file" type="file" accept="image/*">
+        <span class="ascii-upload-icon" aria-hidden="true">↑</span>
+        <strong id="ascii-upload-title">Choose an image</strong>
+        <span id="ascii-upload-help">or drag and drop an image here</span>
+      </label>
+      <div class="ascii-controls">
+        <label class="ascii-control" for="ascii-width"><span>Characters wide</span><output id="ascii-width-value">90</output><input id="ascii-width" type="range" min="24" max="160" value="90"></label>
+        <label class="ascii-control" for="ascii-brightness"><span>Brightness</span><output id="ascii-brightness-value">100%</output><input id="ascii-brightness" type="range" min="40" max="180" value="100"></label>
+        <label class="ascii-control" for="ascii-contrast"><span>Contrast</span><output id="ascii-contrast-value">100%</output><input id="ascii-contrast" type="range" min="40" max="200" value="100"></label>
+        <label class="ascii-control" for="ascii-saturation"><span>Saturation</span><output id="ascii-saturation-value">100%</output><input id="ascii-saturation" type="range" min="0" max="200" value="100"></label>
+        <label class="ascii-check"><input id="ascii-grayscale" type="checkbox"> Grayscale</label>
+        <label class="ascii-check"><input id="ascii-invert" type="checkbox"> Invert characters</label>
+        <label class="ascii-select" for="ascii-palette">Character set
+          <select id="ascii-palette">
+            <option value="@%#*+=-:. ">Standard</option>
+            <option value="█▓▒░ ">Blocks</option>
+            <option value="MWNXK0Okxdolc:,. ">Detailed</option>
+          </select>
+        </label>
+      </div>
+      <p class="ascii-privacy">Your image stays in this browser and is not uploaded.</p>
+    </section>
+    <section class="ascii-output" aria-labelledby="ascii-output-title">
+      <div class="ascii-output-head">
+        <div><h2 id="ascii-output-title">Your ASCII art</h2><p id="ascii-status" role="status" aria-live="polite">Choose an image to get started.</p></div>
+        <div class="ascii-actions">
+          <button type="button" id="ascii-copy-text" disabled>Copy text</button>
+          <button type="button" id="ascii-copy-html" disabled>Copy colored HTML</button>
+        </div>
+      </div>
+      <pre id="ascii-preview" class="ascii-preview" aria-label="ASCII art preview"></pre>
+      <details class="ascii-html-details" id="ascii-html-details" hidden>
+        <summary>HTML source for web / office publishing</summary>
+        <p>Paste the formatted copy into a rich-text editor, or copy this source into a web page.</p>
+        <textarea id="ascii-html-source" readonly spellcheck="false" aria-label="Colored HTML source"></textarea>
+        <button type="button" id="ascii-copy-source">Copy HTML source</button>
+      </details>
+    </section>
+  </div>
+</main>
+<script src="{{ '/assets/js/ascii-art-engine.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/ascii-art.js' | relative_url }}" defer></script>
