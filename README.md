@@ -44,6 +44,20 @@ Post contents, dates and existing URLs are preserved.
 TOPICS_TEST_URL=http://127.0.0.1:4000/topics/ PLAYWRIGHT_MODULE=/path/to/playwright node tests/topics-browser.cjs
 ```
 
+### Tag relationship graph
+
+`/tags/` keeps its readable tag-and-post list as the default view. Its optional
+graph view lays out post and tag nodes in the browser, connected by their
+tag relationships. It supports zoom, pan, fit-to-view, node selection, and
+direct links to related posts without a separate graph-generation step.
+Force controls adjust center strength, repulsion, link strength, and link
+distance. Choose force-directed, degree rings, circular, or tag-cluster
+layouts to transition smoothly; the rearrange button repeats the selected
+layout. In the force-directed layout,
+low-degree nodes are biased toward the outside instead of being pulled into
+the center. The minimum and maximum node radii are adjustable (6 px and 8 px
+by default), with each node's size scaled by its number of connections.
+
 ### Daily mini games
 
 The header's **Mini Games** menu opens Tango, Shikaku, or Zip under

@@ -4,20 +4,140 @@ layout: default
 permalink: "/tags.html"
 ---
 
-<div class="row listrecent">
-{% for tag in site.tags %}
-<div class="section-title col-md-12 mt-4">
-<h2 id="{{ tag[0] | replace: " ","-" }}">{{ tag[0] }}</h2>
-</div>
-{% assign pages_list = tag[1] %}
-{% for post in pages_list %}
-{% if post.title != null %}
-{% if group == null or group == post.group %}
-{% include postbox.html %}
-{% endif %}
-{% endif %}
-{% endfor %}
-{% assign pages_list = nil %}
-{% assign group = nil %}
-{% endfor %}
-</div>
+{% capture ranked_tags %}{% for tag in site.tags %}{% assign latest = tag[1] | sort: 'date' | last %}{{ tag[1].size | plus: 100000 }}|{{ latest.date | date: '%Y%m%d%H%M%S' }}|{{ tag[0] }}<br />{% endfor %}{% endcapture %}
+{% assign tag_rows = ranked_tags | split: '<br />' | sort | reverse %}
+<main class="topics-page all-tags-page" id="tags" lang="ko">
+  <header class="topics-heading all-tags-heading">
+    <p class="topics-eyebrow">EXPLORE BY KEYWORD</p>
+    <div class="all-tags-heading-row">
+      <h1>키워드별 글 모음<span>.</span></h1>
+      <label class="tags-graph-toggle" for="tags-graph-toggle">
+        <input id="tags-graph-toggle" type="checkbox" aria-controls="tags-graph-view">
+        <span>그래프 보기</span>
+      </label>
+    </div>
+    <p>궁금한 키워드부터, 연결해서 읽어 보세요.</p>
+    <span class="topics-total">{{ site.tags.size }}개의 키워드 · {{ site.posts.size }}편의 기록</span>
+  </header>
+  <div class="topics-workspace all-tags-workspace" id="tags-list-view">
+    <nav class="topics-nav" aria-label="키워드 목록">
+      <h2>키워드별로 읽기</h2>
+      {% for row in tag_rows %}
+        {% assign parts = row | strip | split: '|' %}
+        {% assign tag_name = parts | last | strip %}
+        {% if tag_name != '' %}<a href="#{{ tag_name | slugify }}">{{ tag_name | escape }}</a>{% endif %}
+      {% endfor %}
+    </nav>
+    <div class="topics-content all-tags-list-view">
+    {% for row in tag_rows %}
+      {% assign parts = row | strip | split: '|' %}
+      {% assign tag_name = parts | last | strip %}
+      {% if tag_name != '' %}
+      {% assign tagged_posts = site.tags[tag_name] | sort: 'date' | reverse %}
+      <section class="all-tags-group" id="{{ tag_name | slugify }}" aria-labelledby="tag-heading-{{ tag_name | slugify }}">
+        <h2 id="tag-heading-{{ tag_name | slugify }}">{{ tag_name | escape }}</h2>
+        <ol class="topics-post-list">
+          {% for post in tagged_posts %}
+          <li><a href="{{ post.url | relative_url }}"><span class="topics-post-title">{{ post.title | escape }}</span><time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%Y.%m.%d' }}</time><span class="topics-post-arrow" aria-hidden="true">↗</span></a></li>
+          {% endfor %}
+        </ol>
+      </section>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+  <div class="tags-graph-view" id="tags-graph-view" hidden>
+    <p class="tags-graph-help">빈 공간을 드래그해 이동하고 스크롤로 확대·축소하세요. 노드를 선택하면 연결된 글을 볼 수 있습니다.</p>
+    <div class="tags-graph-controls" role="group" aria-label="그래프 보기 조작">
+      <button type="button" data-graph-action="zoom-out" aria-label="축소">−</button>
+      <button type="button" data-graph-action="zoom-in" aria-label="확대">+</button>
+      <button type="button" data-graph-action="fit">화면 맞춤</button>
+      <button type="button" data-graph-action="reset">초기화</button>
+    </div>
+    <div class="tags-graph-layout-control">
+      <label for="tags-graph-layout">정렬 방식</label>
+      <select id="tags-graph-layout">
+        <option value="force">힘 기반 (연결 수 중심)</option>
+        <option value="radial">연결 수 동심원</option>
+        <option value="circle">원형</option>
+        <option value="clusters">태그 군집</option>
+      </select>
+      <button type="button" data-graph-action="relayout">다시 정렬</button>
+    </div>
+    <details class="tags-graph-settings" open>
+      <summary>장력 설정 <span>(힘 기반 정렬)</span></summary>
+      <div class="tags-graph-settings-grid">
+        <label class="tags-graph-setting" for="graph-center-strength">
+          <span>중심 장력 <output data-setting-output="center">0.52</output></span>
+          <input id="graph-center-strength" type="range" min="0" max="1" step="0.01" value="0.52" data-setting="center" aria-label="중심 장력">
+        </label>
+        <label class="tags-graph-setting" for="graph-repulsion">
+          <span>반발력 <output data-setting-output="repulsion">10.00</output></span>
+          <input id="graph-repulsion" type="range" min="0" max="20" step="0.1" value="10" data-setting="repulsion" aria-label="반발력">
+        </label>
+        <label class="tags-graph-setting" for="graph-link-strength">
+          <span>링크 장력 <output data-setting-output="link-strength">1.00</output></span>
+          <input id="graph-link-strength" type="range" min="0" max="1" step="0.01" value="1" data-setting="link-strength" aria-label="링크 장력">
+        </label>
+        <label class="tags-graph-setting" for="graph-link-distance">
+          <span>링크 거리 <output data-setting-output="link-distance">250</output></span>
+          <input id="graph-link-distance" type="range" min="50" max="500" step="10" value="250" data-setting="link-distance" aria-label="링크 거리">
+        </label>
+      </div>
+    </details>
+    <details class="tags-graph-settings tags-graph-node-size-settings" open>
+      <summary>노드 크기 <span>(연결 수 기준)</span></summary>
+      <div class="tags-graph-settings-grid">
+        <label class="tags-graph-setting" for="graph-node-size-min">
+          <span>최소 노드 크기 <output data-size-output="min">6</output></span>
+          <input id="graph-node-size-min" type="range" min="4" max="28" step="1" value="6" data-node-size="min" aria-label="최소 노드 크기">
+        </label>
+        <label class="tags-graph-setting" for="graph-node-size-max">
+          <span>최대 노드 크기 <output data-size-output="max">8</output></span>
+          <input id="graph-node-size-max" type="range" min="4" max="28" step="1" value="8" data-node-size="max" aria-label="최대 노드 크기">
+        </label>
+      </div>
+    </details>
+    <div class="tags-graph-canvas-wrap" id="tags-graph-canvas-wrap">
+      <canvas class="tags-graph-canvas" id="tags-graph-canvas" tabindex="0" role="application" aria-label="태그와 글의 연결 그래프. 화살표 키로 노드를 선택하고 Enter 키로 관련 글을 엽니다."></canvas>
+      <section class="tags-graph-popover" id="tags-graph-popover" aria-label="그래프 노드 정보" hidden>
+        <button class="tags-graph-popover-close" type="button" aria-label="닫기">×</button>
+        <div class="tags-graph-popover-content"></div>
+      </section>
+    </div>
+    <script id="tags-graph-data" type="application/json">
+      {
+        "tags": [
+          {% for tag in site.tags %}
+          {% unless forloop.first %},{% endunless %}
+          {
+            "id": {{ "tag:" | append: tag[0] | jsonify }},
+            "label": {{ tag[0] | jsonify }},
+            "href": {{ tag[0] | slugify | prepend: "#" | prepend: "/tags/" | relative_url | jsonify }},
+            "posts": [
+              {% for post in tag[1] %}
+              {% unless forloop.first %},{% endunless %}
+              {{ "post:" | append: post.url | jsonify }}
+              {% endfor %}
+            ]
+          }
+          {% endfor %}
+        ],
+        "posts": [
+          {% for post in site.posts %}
+          {% unless forloop.first %},{% endunless %}
+          {
+            "id": {{ "post:" | append: post.url | jsonify }},
+            "label": {{ post.title | jsonify }},
+            "href": {{ post.url | relative_url | jsonify }},
+            "date": {{ post.date | date: "%Y-%m-%d" | jsonify }},
+            "displayDate": {{ post.date | date: "%Y.%m.%d" | jsonify }}
+          }
+          {% endfor %}
+        ]
+      }
+    </script>
+    <div class="tags-graph-legend"><span><i class="tag-node-key"></i>태그</span><span><i class="post-node-key"></i>글</span></div>
+  </div>
+</main>
+<script src="{{ '/assets/js/tags-graph.js' | relative_url }}?v=13" defer></script>

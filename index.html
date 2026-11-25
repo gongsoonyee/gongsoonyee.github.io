@@ -8,16 +8,16 @@ title: Home
     <section class="home-categories" aria-label="인기 태그별 글 선택">
       <div class="topics-section-heading"><h2>Popular Tags</h2><a href="{{ '/tags/' | relative_url }}">전체 보기 <span aria-hidden="true">↗</span></a></div>
       <ul class="category-options">
-      {% capture ranked_tags %}{% for tag in site.tags %}{% assign latest = tag[1] | sort: 'date' | last %}{{ tag[1].size | plus: 100000 }}|{{ latest.date | date: '%Y%m%d%H%M%S' }}|{{ tag[0] }}
-    {% endfor %}{% endcapture %}
-      {% assign tag_rows = ranked_tags | newline_to_br | replace: '
-', '' | split: '<br />' | sort | reverse %}
+      {% capture ranked_tags %}{% for tag in site.tags %}{% assign latest = tag[1] | sort: 'date' | last %}{{ tag[1].size | plus: 100000 }}|{{ latest.date | date: '%Y%m%d%H%M%S' }}|{{ tag[0] }}<br />{% endfor %}{% endcapture %}
+      {% assign tag_rows = ranked_tags | split: '<br />' | sort | reverse %}
+      {% assign tag_count = 0 %}
       {% for row in tag_rows %}
         {% assign parts = row | strip | split: '|' %}
         {% assign tag_name = parts | last | strip %}
-        {% if tag_name != '' %}
+        {% if tag_name != '' and tag_count < 5 %}
         {% assign tagged_posts = site.tags[tag_name] | sort: 'date' | reverse %}
         <li><button type="button" class="category-option" data-topic="{{ tag_name | escape }}" aria-pressed="false"><span class="category-name">#{{ tag_name }}</span><small>{{ tagged_posts.size }}편</small></button></li>
+        {% assign tag_count = tag_count | plus: 1 %}
         {% endif %}
       {% endfor %}
       </ul>
