@@ -129,7 +129,7 @@ ga('send', 'pageview');
 
 <!-- Site Title
 ================================================== -->
-{% unless page.search_page or page.game_page or page.series_page or page.tool_page or page.topics_page or page.tags_page or page.url == "/" %}
+{% unless page.search_page or page.game_page or page.series_page or page.tool_page or page.topics_page or page.tags_page or page.layout == "post" or page.url == "/" %}
 <div class="mainheading">
     <h1 class="sitetitle">{{ site.name }}</h1>
     <p class="lead">
