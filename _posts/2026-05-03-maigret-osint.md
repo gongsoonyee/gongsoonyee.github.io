@@ -2,7 +2,7 @@
 layout: post
 title: "닉네임 하나로 수천 개 사이트를 뒤지는 OSINT 도구, Maigret 사용기"
 categories: [ Development ]
-tags: [ 보안, OSINT, 파이썬, Maigret, 정보수집 ]
+tags: [ 보안, OSINT, 파이썬, Maigret ]
 ---
 
 2026년 5월 3일 · @gongsoonyee
