@@ -4,7 +4,7 @@ title: "GitHub Pages 블로그가 검색에 잡히도록 설정하는 4가지"
 date: 2026-11-25 12:00:00 +0900
 description: "GitHub Pages 블로그를 Google Search Console에 등록하고, 사이트맵 제출·SEO와 GEO를 고려한 글쓰기·meta description 설정까지 정리했다."
 categories: [ Development ]
-tags: [ Google Search Console, GitHub Pages, SEO, 블로그 ]
+tags: [ Google Search Console, GitHub Pages, SEO, 블로그, 검색 노출, 사이트맵 ]
 ---
 
 2026년 11월 25일 · @gongsoonyee

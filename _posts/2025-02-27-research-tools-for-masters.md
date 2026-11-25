@@ -3,7 +3,7 @@ layout: post
 title: "석사 생활을 버티게 해준 연구 툴 정리"
 date: 2025-02-27 12:00:00 +0900
 categories: [ Research, Study ]
-tags: [ 연구 툴, 논문, 석사, Zotero, Obsidian ]
+tags: [ 연구 툴, 논문, 석사, Zotero, Obsidian, 문헌 검색, 학술 글쓰기 ]
 ---
 
 2025년 2월 27일 · @gongsoonyee

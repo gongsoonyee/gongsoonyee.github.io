@@ -2,7 +2,7 @@
 layout: post
 title: "백준 서비스 종료"
 categories: [ Essay ]
-tags: [ 백준, 회고 ]
+tags: [ 백준, 회고, 알고리즘, 온라인 저지 ]
 image: assets/images/2026-04-28-baekjoon-service-end/baekjoon-repo.jpg
 ---
 

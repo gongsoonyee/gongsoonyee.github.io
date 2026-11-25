@@ -3,7 +3,7 @@ layout: post
 title: "andrej-karpathy-skills"
 date: 2026-03-05 12:00:00 +0900
 categories: [ Development ]
-tags: [ AI, Claude Code, LLM, 개발도구, Skills ]
+tags: [ AI, Claude Code, LLM, 개발도구, Skills, 코드 품질, 개발 생산성 ]
 ---
 
 2026년 3월 5일 · @gongsoonyee

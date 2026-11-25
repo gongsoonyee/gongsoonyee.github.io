@@ -3,7 +3,7 @@ layout: post
 title: "BOJ is Back"
 date: 2026-11-17 12:00:00 +0900
 categories: [ Essay ]
-tags: [ 백준, 복귀 ]
+tags: [ 백준, 복귀, 알고리즘, 온라인 저지 ]
 image: assets/images/2026-11-17-boj-is-back/boj-is-back.jpeg
 
 ---

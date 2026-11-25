@@ -2,7 +2,7 @@
 layout: post
 title: "AI 에이전트 '피클' 후기"
 categories: [ AI ]
-tags: [ 피클, AI 에이전트, 개인정보 ]
+tags: [ 피클, AI 에이전트, 개인정보, AI 비서, 업무 자동화 ]
 image: assets/images/2026-11-01-pickle-ai-agent-review/pickle-logo.png
 ---
 

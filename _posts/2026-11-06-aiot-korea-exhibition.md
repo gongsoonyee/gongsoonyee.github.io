@@ -2,7 +2,7 @@
 layout: post
 title: "AIoT Korea Exhibition 2026 참관기: AI 모델보다 '시스템'이 보였던 전시회"
 categories: [ AI ]
-tags: [ AIoT, 후기, 엣지AI, XAI, 피지컬AI, 디지털트윈 ]
+tags: [ AIoT, 후기, 엣지AI, XAI, 피지컬AI, 디지털트윈, 사물인터넷, 산업 AI ]
 image: assets/images/2026-11-06-aiot-korea-exhibition/aiot-korea-2026.jpg
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title: "AI TOP 100 예선 참여 후기"
 categories: [ AI, Development ]
-tags: [ AI TOP 100, Claude, 후기 ]
+tags: [ AI TOP 100, Claude, 후기, AI 에이전트, 고객 지원 ]
 image: assets/images/2026-10-01-claude-customer-support-agent/ai-top100-2026-banner.png
 ---
 

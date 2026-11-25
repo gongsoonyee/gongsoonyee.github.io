@@ -2,7 +2,7 @@
 layout: post
 title: "논문 제출 상한제의 등장: ICLR은 왜 '1인 20편' 선을 그었나"
 categories: [ AI, Research ]
-tags: [ ICLR, 논문, 학회 ]
+tags: [ ICLR, 논문, 학회, 피어 리뷰, 학술 출판 ]
 image: assets/images/2026-11-05-iclr-2027-submission-cap/iclr-submission-trend.jpg
 ---
 

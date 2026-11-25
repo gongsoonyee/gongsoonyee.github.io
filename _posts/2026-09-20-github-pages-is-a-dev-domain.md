@@ -3,7 +3,7 @@ layout: post
 title: "GitHub Pages에 무료 도메인 달기: is-a.dev 등록 후기"
 date: 2026-09-20 12:00:00 +0900
 categories: [ Development ]
-tags: [ GitHub Pages, 도메인, is-a.dev, 블로그 ]
+tags: [ GitHub Pages, 도메인, is-a.dev, 블로그, DNS, 도메인 설정 ]
 ---
 
 2026년 9월 20일 · @gongsoonyee

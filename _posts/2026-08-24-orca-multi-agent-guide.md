@@ -2,7 +2,7 @@
 layout: post
 title: "Orca 핵심 정리: 여러 AI 에이전트를 한 화면에서 지휘하기"
 categories: [ AI, Development ]
-tags: [ Orca, AI 에이전트 ]
+tags: [ Orca, AI 에이전트, Claude Code, Codex ]
 image: assets/images/2026-08-24-orca-multi-agent-guide/orca-overview.jpg
 ---
 
