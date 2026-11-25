@@ -2,37 +2,33 @@
 layout: default
 title: Home
 ---
+<div class="home-layout">
+  <aside class="home-sidebar" aria-label="주제별 글 탐색">
+    {% include home_topics.html %}
+    <section class="home-categories" aria-label="인기 태그별 글 선택">
+      <div class="topics-section-heading"><h2>Popular Tags</h2><a href="{{ '/tags/' | relative_url }}">전체 보기 <span aria-hidden="true">↗</span></a></div>
+      <ul class="category-options">
+      {% capture ranked_tags %}{% for tag in site.tags %}{% assign latest = tag[1] | sort: 'date' | last %}{{ tag[1].size | plus: 100000 }}|{{ latest.date | date: '%Y%m%d%H%M%S' }}|{{ tag[0] }}
+    {% endfor %}{% endcapture %}
+      {% assign tag_rows = ranked_tags | newline_to_br | replace: '
+', '' | split: '<br />' | sort | reverse %}
+      {% for row in tag_rows %}
+        {% assign parts = row | strip | split: '|' %}
+        {% assign tag_name = parts | last | strip %}
+        {% if tag_name != '' %}
+        {% assign tagged_posts = site.tags[tag_name] | sort: 'date' | reverse %}
+        <li><button type="button" class="category-option" data-topic="{{ tag_name | escape }}" aria-pressed="false"><span class="category-name">#{{ tag_name }}</span><small>{{ tagged_posts.size }}편</small></button></li>
+        {% endif %}
+      {% endfor %}
+      </ul>
+    </section>
+  </aside>
+  <div class="home-main">
 <section class="featured-posts" id="home-featured">
   <div class="section-title"><h2><span>Featured</span></h2></div>
-  <div class="row">{% for post in site.posts %}{% if post.featured %}{% include featuredbox.html %}{% endif %}{% endfor %}</div>
   <div class="row featured-notion-links">
-    {% for link in site.data.featured_links %}{% include featuredbox.html item=link %}{% endfor %}
-  </div>
-</section>
-{% include home_topics.html %}
-<section class="home-categories" aria-label="인기 태그별 글 선택">
-  <div class="section-title"><h2><span>Popular Tags</span></h2></div>
-  <button type="button" class="category-all" data-topic="all" aria-pressed="true">전체 글</button>
-  <div class="category-options">
-  {% capture ranked_tags %}{% for tag in site.tags %}{% assign latest = tag[1] | sort: 'date' | last %}{{ tag[1].size | plus: 100000 }}|{{ latest.date | date: '%Y%m%d%H%M%S' }}|{{ tag[0] }}
-{% endfor %}{% endcapture %}
-  {% assign tag_rows = ranked_tags | newline_to_br | replace: '
-', '' | split: '<br />' | sort | reverse %}
-  {% assign tag_count = 0 %}
-  {% for row in tag_rows %}
-    {% assign parts = row | strip | split: '|' %}
-    {% assign tag_name = parts | last | strip %}
-    {% if tag_name != '' and tag_count < 6 %}
-    {% assign tagged_posts = site.tags[tag_name] | sort: 'date' | reverse %}
-    {% assign latest = tagged_posts | first %}
-    <button type="button" class="category-option" data-topic="{{ tag_name | escape }}" aria-pressed="false">
-      {% if latest.image %}<img src="{% if latest.image contains '://' %}{{ latest.image }}{% else %}{{ latest.image | relative_url }}{% endif %}" alt="{{ latest.title | escape }}" loading="lazy">{% else %}{% include text_cover.html item=latest class="category-cover" %}{% endif %}
-      <span class="category-name">#{{ tag_name }} <small>{{ tagged_posts.size }}개</small></span>
-      <span class="category-latest">{{ latest.title }}</span>
-    </button>
-    {% assign tag_count = tag_count | plus: 1 %}
-    {% endif %}
-  {% endfor %}
+    {% for post in site.posts %}{% if post.featured %}{% include featuredbox.html %}{% endif %}{% endfor %}
+    {% for link in site.data.featured_links %}{% unless link.title == 'Portfolio_KR' %}{% include featuredbox.html item=link %}{% endunless %}{% endfor %}
   </div>
 </section>
 <section class="recent-posts" id="home-stories">
@@ -47,4 +43,6 @@ title: Home
   </div>
 <nav id="home-pagination" class="home-pagination" aria-label="글 목록 페이지" hidden></nav>
 </section>
-<script src="{{ '/assets/js/home-categories.js' | relative_url }}?v=3"></script>
+  </div>
+</div>
+<script src="{{ '/assets/js/home-categories.js' | relative_url }}?v=4"></script>

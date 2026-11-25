@@ -280,6 +280,16 @@ span.post-read-more a:hover {
 
 .mediumnavigation .navbar-brand {
     font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mediumnavigation .navbar-brand span {
+    color: #242424;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -.03em;
 }
 
 .mediumnavigation .dropdown-menu {
@@ -301,7 +311,7 @@ span.post-read-more a:hover {
 
 .mediumnavigation .navbar-brand img {
     max-height: 30px;
-    margin-right: 5px;
+    margin-right: 0;
 }
 
 .mainheading h1.sitetitle {

@@ -3,7 +3,7 @@
 <main class="topics-page" id="topics" lang="ko">
   <header class="topics-heading"><p class="topics-eyebrow">READ BY TOPIC</p><h1>주제별 글 모음<span>.</span></h1><p>궁금한 주제부터, 연결해서 읽어 보세요.</p><span class="topics-total">{{ site.posts.size }}편의 기록 · {{ site.data.reading.size }}개의 주제</span></header>
   <div class="topics-workspace">
-    <nav class="topics-nav" aria-label="주제 바로가기"><p>목차</p>
+    <nav class="topics-nav" aria-label="주제별로 읽기"><h2>주제별로 읽기</h2>
       {% for topic in site.data.reading %}<a href="#{{ topic.id }}">{{ topic.title }}</a>{% endfor %}
       {% if unclassified_count > 0 %}<a href="#unclassified">아직 분류하지 않은 글</a>{% endif %}
     </nav>

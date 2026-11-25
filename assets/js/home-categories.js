@@ -37,7 +37,11 @@
       history.pushState(null, '', url);
     }
   }
-  buttons.forEach(function (button) { button.addEventListener('click', function () { select(button.dataset.topic, true); }); });
+  buttons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      select(currentTopic === button.dataset.topic ? 'all' : button.dataset.topic, true);
+    });
+  });
   window.addEventListener('popstate', function () { select(new URL(location.href).searchParams.get('tag') || 'all', false, new URL(location.href).searchParams.get('page')); });
   select(new URL(location.href).searchParams.get('tag') || 'all', false, new URL(location.href).searchParams.get('page'));
 })();
