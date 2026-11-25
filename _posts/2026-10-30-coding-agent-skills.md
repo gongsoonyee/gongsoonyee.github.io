@@ -174,6 +174,35 @@ codex plugin add ponytail@ponytail
 
 `/ponytail-review`와 `/ponytail-audit`도 보안을 보긴 하지만 "코드 리뷰" 수준입니다. 공격 클래스별로 파고들어 반박 검증까지 거치는 깊이는 security-audit 쪽이 확실히 위입니다. 반대로 security-audit가 찾은 이슈를 고칠 때 Ponytail이 켜져 있으면 수정 범위가 과하게 커지는 걸 막아줍니다.
 
+## 4. 에이전트 설계 및 아키텍처
+
+에이전트와 외부 도구, 워크플로, 백엔드 시스템을 연결하는 구조는 Wrapper(래퍼), Cascade(캐스케이드), Junction(정션) 세 가지 관점으로 나눠볼 수 있습니다.
+
+### Wrapper(래퍼): 가벼운 진입점
+
+Wrapper는 에이전트와 복잡한 외부 도구(API, 레거시 시스템, 라이브러리 등) 사이에서 인터페이스를 단순화하는 어댑터입니다.
+
+- 에이전트가 이해하기 쉬운 자연어 설명이나 표준화된 JSON 스키마로 도구의 입출력을 감쌉니다.
+- 권한 검증, 입력값 필터링, 오류 처리 등 외부 도구를 직접 호출할 때 생길 수 있는 위험을 통제합니다.
+- **핵심 키워드:** 가벼운 진입점, 인터페이스 단순화, 권한 및 실행 제어
+
+### Cascade(캐스케이드): 여러 도구를 한 입구로 묶기
+
+Cascade는 여러 도구나 서브 에이전트의 실행 순서, 우선순위, 흐름을 단계적으로 엮는 연쇄 구조입니다.
+
+- 하나의 요청을 처리할 때 1차 도구의 결과에 따라 2차, 3차 도구가 이어서 호출되도록 흐름을 제어합니다.
+- 조건에 따른 분기나 실패 시 대체 경로(fallback) 실행 등 복잡한 워크플로를 매끄럽게 연결합니다.
+- 맥락에 따라 로컬 LLM 엔드포인트와 MCP 클라이언트를 연결하거나, 상·하위 에이전트 사이의 협업과 계획을 조율하는 방식을 뜻하기도 합니다.
+- **핵심 키워드:** 연쇄 호출, 워크플로 통합, 순차·조건부 실행
+
+### Junction(정션): 진입점과 본체의 물리적·논리적 연결
+
+Junction은 분산되거나 독립적으로 존재하는 에이전트와 핵심 데이터·실행 본체(Core, Database, Backend)를 안정적으로 맞물리게 하는 연결 허브입니다.
+
+- 에이전트 영역과 백엔드 시스템 영역 사이의 데이터 정합성, 상태 동기화, 트랜잭션을 관리합니다.
+- 여러 경로로 들어오는 에이전트 요청을 정리해 핵심 비즈니스 로직이나 대규모 데이터베이스 같은 하나의 본체로 정확히 전달합니다.
+- **핵심 키워드:** 연결 허브, 상태 동기화, 트랜잭션 및 정합성 보장
+
 ## 마무리
 
 두 스킬 모두 모델을 바꾸지 않고 "일하는 방식"만 바꿔서 결과를 끌어올린다는 점이 인상적이었습니다. 하나는 더 깊게, 하나는 더 적게. 설치는 각각 명령 두 줄이면 끝나니 가볍게 붙여보길 권합니다.
@@ -184,3 +213,4 @@ codex plugin add ponytail@ponytail
 - [Cloudflare 블로그: Build your own vulnerability harness](https://blog.cloudflare.com/build-your-own-vulnerability-harness/)
 - [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)
 - [Ponytail 벤치마크 결과](https://github.com/DietrichGebert/ponytail/blob/main/benchmarks/results/2026-10-07-agentic.md)
+- [WikiDocs: Wrapper, Cascade, Junction](https://wikidocs.net/367423)
