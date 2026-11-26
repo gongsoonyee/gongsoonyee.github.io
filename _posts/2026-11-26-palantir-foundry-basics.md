@@ -12,7 +12,7 @@ image: assets/images/2026-11-26-palantir-foundry-basics/completion.png
 
 Palantir Learn의 **파운드리 기초 과정**을 들었다. 데이터 플랫폼의 기본 개념부터 온톨로지와 애플리케이션, 기존 시스템과의 통합까지 짧은 영상으로 살펴보는 입문 과정이다.
 
-## 영상 순서대로 필기
+## 내용 정리
 
 ### 1. 파운드리란?
 
